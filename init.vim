@@ -239,6 +239,12 @@ nnoremap <leader><<< <cmd>vertical resize -10<cr>
 nnoremap <leader>>>>> <cmd>vertical resize +20<cr>
 nnoremap <leader><<<< <cmd>vertical resize -20<cr>
 
+" mouse support
+set mouse=a
+map <ScrollWheelDown> j
+map <ScrollWheelUp> k
+
+" custom keybindings
 au Filetype clojure nnoremap <leader>rst <cmd>ConjureEval (do (rules.core/reset-rules!) (rules.core/reset-loader!))<cr>
 
 " conjure setup
