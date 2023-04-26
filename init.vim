@@ -2,6 +2,7 @@
 if empty(glob('~/.config/nvim/autoload/pathogen.vim'))
     silent !curl -fLo ~/.config/nvim/autoload/pathogen.vim --create-dirs
                 \ https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim
+    source $MYVIMRC
 endif
 
 " Automatically install Vim-Plug if it is not yet installed
