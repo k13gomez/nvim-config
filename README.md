@@ -18,3 +18,7 @@ $ git clone git@github.com:k13gomez/nvim-config.git ~/.config/nvim
 ```bash
 $ nvim
 ```
+
+## Useful links
+
+- [Conjure Docs](https://github.com/Olical/conjure/blob/master/doc/conjure.txt)
