@@ -259,6 +259,7 @@ nnoremap <leader>,>>> <cmd>horizontal resize +10<cr>
 nnoremap <leader>,<<< <cmd>horizontal resize -10<cr>
 nnoremap <leader>,>>>> <cmd>horizontal resize +20<cr>
 nnoremap <leader>,<<<< <cmd>horizontal resize -20<cr>
+nnoremap <leader>repl <cmd>ConjureCljConnectPortFile<cr>
 
 " mouse support
 set mouse=a
