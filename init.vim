@@ -70,6 +70,8 @@ Plug 'PaterJason/cmp-conjure'
 
 Plug 'mhinz/vim-startify'
 Plug 'kien/rainbow_parentheses.vim'
+Plug 'guns/vim-sexp'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'hashivim/vim-terraform'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-dotenv'
@@ -77,6 +79,7 @@ Plug 'NLKNguyen/papercolor-theme'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'jistr/vim-nerdtree-tabs'
+Plug 'guns/vim-clojure-static'
 
 call plug#end()
 
@@ -129,6 +132,18 @@ set statusline+=%1*\ Line:\ %02l/%L\ (%3p%%)\            " Line number / total l
 set statusline+=\ [%b][0x%B]\                            " ASCII and byte code under cursor
 set statusline+=%0*\ %{toupper(g:currentmode[mode()])}\  " The current mode
 " END: status bar
+
+" BEGIN: Clojure syntax and formatting
+
+let g:clojure_fuzzy_indent = 1
+let g:clojure_fuzzy_indent_patterns = ['^with.*', '^def', '^let', '^fdef', '?', '^future', '^try', '^catch', '^finally', '^bound.*fn', '^cond', '^case', '^async', 'go', 'go-loop', 'match', 'do', 'comment']
+let g:clojure_fuzzy_indent_blacklist = [] "['-fn$', '\v^with-%(meta|out-str|loading-context)$']
+let g:clojure_special_indent_words = 'deftype,defrecord,reify,proxy,extend-type,extend-protocol,letfn'
+let g:clojure_align_subforms = 1
+let g:clojure_align_multiline_strings = 1
+let g:clojure_maxlines = 1000
+
+" END: Clojure syntax and formatting
 
 " BEGIN: Rainbow Parentheses
 let g:rbpt_colorpairs = [
@@ -189,6 +204,17 @@ function! DoPrettyXML()
 endfunction
 command! PrettyXML call DoPrettyXML()
 
+function! DoPrettyJSON()
+  " save the filetype so we can restore it later
+  let l:origft = &ft
+  set ft=
+  " format JSON using jq
+  silent %!jq .
+  " restore the filetype
+  exe "set ft=" . l:origft
+endfunction
+command! PrettyJSON call DoPrettyJSON()
+
 function! Guid()
 python3 << EOF
 import uuid, vim
@@ -222,8 +248,10 @@ nnoremap <leader>sv <cmd>source $MYVIMRC<cr>
 nnoremap <leader>uid <cmd>call Guid()<cr>
 nnoremap <leader>eid <cmd>call EmptyGuid()<cr>
 nnoremap <leader>now <cmd>call DateTimeNow()<cr>
+nnoremap <leader>xml <cmd>call DoPrettyXML()<cr>
+nnoremap <leader>json <cmd>call DoPrettyJSON()<cr>
 nnoremap <leader>tt <cmd>NERDTreeTabsToggle<cr>
-nnoremap <leader>ff <cmd>NERDTreeFocusToggle<cr>
+nnoremap <leader>tf <cmd>NERDTreeFocusToggle<cr>
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
@@ -238,6 +266,12 @@ nnoremap <leader>>>> <cmd>vertical resize +10<cr>
 nnoremap <leader><<< <cmd>vertical resize -10<cr>
 nnoremap <leader>>>>> <cmd>vertical resize +20<cr>
 nnoremap <leader><<<< <cmd>vertical resize -20<cr>
+nnoremap <leader>,>> <cmd>horizontal resize +5<cr>
+nnoremap <leader>,<< <cmd>horizontal resize -5<cr>
+nnoremap <leader>,>>> <cmd>horizontal resize +10<cr>
+nnoremap <leader>,<<< <cmd>horizontal resize -10<cr>
+nnoremap <leader>,>>>> <cmd>horizontal resize +20<cr>
+nnoremap <leader>,<<<< <cmd>horizontal resize -20<cr>
 
 " mouse support
 set mouse=a
