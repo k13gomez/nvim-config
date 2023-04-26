@@ -79,7 +79,6 @@ Plug 'NLKNguyen/papercolor-theme'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'jistr/vim-nerdtree-tabs'
-Plug 'guns/vim-clojure-static'
 
 call plug#end()
 
@@ -132,18 +131,6 @@ set statusline+=%1*\ Line:\ %02l/%L\ (%3p%%)\            " Line number / total l
 set statusline+=\ [%b][0x%B]\                            " ASCII and byte code under cursor
 set statusline+=%0*\ %{toupper(g:currentmode[mode()])}\  " The current mode
 " END: status bar
-
-" BEGIN: Clojure syntax and formatting
-
-let g:clojure_fuzzy_indent = 1
-let g:clojure_fuzzy_indent_patterns = ['^with.*', '^def', '^let', '^fdef', '?', '^future', '^try', '^catch', '^finally', '^bound.*fn', '^cond', '^case', '^async', 'go', 'go-loop', 'match', 'do', 'comment']
-let g:clojure_fuzzy_indent_blacklist = [] "['-fn$', '\v^with-%(meta|out-str|loading-context)$']
-let g:clojure_special_indent_words = 'deftype,defrecord,reify,proxy,extend-type,extend-protocol,letfn'
-let g:clojure_align_subforms = 1
-let g:clojure_align_multiline_strings = 1
-let g:clojure_maxlines = 1000
-
-" END: Clojure syntax and formatting
 
 " BEGIN: Rainbow Parentheses
 let g:rbpt_colorpairs = [
