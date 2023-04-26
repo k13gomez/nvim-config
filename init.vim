@@ -270,3 +270,4 @@ au Filetype clojure nnoremap <leader>rst <cmd>ConjureEval (do (rules.core/reset-
 
 " conjure setup
 lua require('conjure')
+lua require('treesitter')
