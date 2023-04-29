@@ -66,12 +66,14 @@ Plug 'guns/vim-sexp'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'hashivim/vim-terraform'
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-dotenv'
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 Plug 'HiPhish/nvim-ts-rainbow2'
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'MunifTanjim/nui.nvim'
 Plug 'nvim-neo-tree/neo-tree.nvim'
+Plug 'nvim-lualine/lualine.nvim'
 
 call plug#end()
 
@@ -86,51 +88,6 @@ highlight Pmenu ctermbg=Black guibg=Black
 " status bar colors
 au InsertEnter * hi statusline guifg=black guibg=#d7afff ctermfg=black ctermbg=magenta
 au InsertLeave * hi statusline guifg=black guibg=#8fbfdc ctermfg=black ctermbg=cyan
-hi statusline guifg=black guibg=#8fbfdc ctermfg=black ctermbg=cyan
-
-" Status line
-" default: set statusline=%f\ %h%w%m%r\ %=%(%l,%c%V\ %=\ %P%)
-
-" Status Line Custom
-let g:currentmode={
-    \ 'n'  : 'Normal',
-    \ 'no' : 'Normal·Operator Pending',
-    \ 'v'  : 'Visual',
-    \ 'V'  : 'V·Line',
-    \ '^V' : 'V·Block',
-    \ 's'  : 'Select',
-    \ 'S'  : 'S·Line',
-    \ '^S' : 'S·Block',
-    \ 'i'  : 'Insert',
-    \ 'R'  : 'Replace',
-    \ 'Rv' : 'V·Replace',
-    \ 'c'  : 'Command',
-    \ 'cv' : 'Vim Ex',
-    \ 'ce' : 'Ex',
-    \ 'r'  : 'Prompt',
-    \ 'rm' : 'More',
-    \ 'r?' : 'Confirm',
-    \ '!'  : 'Shell',
-    \ 't'  : 'Terminal'
-    \}
-set laststatus=2
-set noshowmode
-set statusline=
-set statusline+=%0*\ %n\                                 " Buffer number
-set statusline+=%1*\ %<%F%m%r%h%w\                       " File path, modified, readonly, helpfile, preview
-set statusline+=%3*│                                     " Separator
-set statusline+=%2*\ %Y\                                 " FileType
-set statusline+=%3*│                                     " Separator
-set statusline+=%2*\ %{''.(&fenc!=''?&fenc:&enc).''}     " Encoding
-set statusline+=\ (%{&ff})                               " FileFormat (dos/unix..)
-set statusline+=\ %{FugitiveStatusline()}                " git status
-set statusline+=%=                                       " Right Side
-set statusline+=%2*\ Col:\ %02v\                         " Column number
-set statusline+=%3*│                                     " Separator
-set statusline+=%1*\ Line:\ %02l/%L\ (%3p%%)\            " Line number / total lines, percentage of document
-set statusline+=\ [%b][0x%B]\                            " ASCII and byte code under cursor
-set statusline+=%0*\ %{toupper(g:currentmode[mode()])}\  " The current mode
-" END: status bar
 
 " BEGIN: Helpers
 " Utility functions
@@ -244,3 +201,4 @@ au Filetype clojure nnoremap <leader>rst <cmd>ConjureEval (do (rules.core/reset-
 lua require('conjure-setup')
 lua require('treesitter-setup')
 lua require('neo-tree-setup')
+lua require('lualine-setup')
