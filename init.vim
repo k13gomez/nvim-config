@@ -84,11 +84,6 @@ colorscheme tokyonight-night
 set guifont=Monaco:h14
 highlight Pmenu ctermbg=Black guibg=Black
 
-" BEGIN: status bar
-" status bar colors
-au InsertEnter * hi statusline guifg=black guibg=#d7afff ctermfg=black ctermbg=magenta
-au InsertLeave * hi statusline guifg=black guibg=#8fbfdc ctermfg=black ctermbg=cyan
-
 " BEGIN: Helpers
 " Utility functions
 function! DoPrettyXML()
@@ -188,6 +183,7 @@ nnoremap <leader>,<<< <cmd>horizontal resize -10<cr>
 nnoremap <leader>,>>>> <cmd>horizontal resize +20<cr>
 nnoremap <leader>,<<<< <cmd>horizontal resize -20<cr>
 nnoremap <leader>repl <cmd>ConjureCljConnectPortFile<cr>
+nnoremap <leader>gg <cmd>GitGutterEnable<cr>
 
 " mouse support
 set mouse=a
