@@ -39,14 +39,6 @@ set cursorline              " highlight current cursorline
 set ttyfast                 " Speed up scrolling in Vim
 set redrawtime=5000         " set maximum redrawtime for syntax highlight
 
-" color settings
-let macvim_skip_colorscheme=1
-set termguicolors
-set background=dark
-colorscheme PaperColor
-set guifont=Monaco:h14
-highlight Pmenu ctermbg=Black guibg=Black
-
 " Swap files and backup directory configuration
 "" set noswapfile                        " disable creating swap file
 set directory=~/.cache/vim-swapfiles//   " Directory for swap files.
@@ -70,18 +62,25 @@ Plug 'hrsh7th/vim-vsnip'
 Plug 'PaterJason/cmp-conjure'
 
 Plug 'mhinz/vim-startify'
-Plug 'kien/rainbow_parentheses.vim'
 Plug 'guns/vim-sexp'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'hashivim/vim-terraform'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-dotenv'
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'jistr/vim-nerdtree-tabs'
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+Plug 'HiPhish/nvim-ts-rainbow2'
+Plug 'nvim-tree/nvim-web-devicons'
+Plug 'MunifTanjim/nui.nvim'
+Plug 'nvim-neo-tree/neo-tree.nvim'
 
 call plug#end()
+
+" color settings
+set termguicolors
+set background=dark
+colorscheme tokyonight-night
+set guifont=Monaco:h14
+highlight Pmenu ctermbg=Black guibg=Black
 
 " BEGIN: status bar
 " status bar colors
@@ -132,34 +131,6 @@ set statusline+=%1*\ Line:\ %02l/%L\ (%3p%%)\            " Line number / total l
 set statusline+=\ [%b][0x%B]\                            " ASCII and byte code under cursor
 set statusline+=%0*\ %{toupper(g:currentmode[mode()])}\  " The current mode
 " END: status bar
-
-" BEGIN: Rainbow Parentheses
-let g:rbpt_colorpairs = [
-    \ ['brown',       'RoyalBlue3'],
-    \ ['green',       'SeaGreen3'],
-    \ ['darkgray',    'DarkOrchid3'],
-    \ ['darkgreen',   'firebrick3'],
-    \ ['darkcyan',    'RoyalBlue3'],
-    \ ['darkred',     'SeaGreen3'],
-    \ ['brown',       'firebrick3'],
-    \ ['gray',        'RoyalBlue3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['green',       'firebrick3'],
-    \ ['darkgreen',   'RoyalBlue3'],
-    \ ['darkcyan',    'SeaGreen3'],
-    \ ['darkred',     'DarkOrchid3'],
-    \ ['red',         'firebrick3'],
-    \ ]
-
-let g:rbpt_max = 14
-let g:rbpt_loadcmd_toggle = 0
-
-au VimEnter * RainbowParenthesesActivate
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
-
-" END: Rainbow Parentheses
 
 " BEGIN: Helpers
 " Utility functions
@@ -238,8 +209,7 @@ nnoremap <leader>eid <cmd>call EmptyGuid()<cr>
 nnoremap <leader>now <cmd>call DateTimeNow()<cr>
 nnoremap <leader>xml <cmd>call DoPrettyXML()<cr>
 nnoremap <leader>json <cmd>call DoPrettyJSON()<cr>
-nnoremap <leader>tt <cmd>NERDTreeTabsToggle<cr>
-nnoremap <leader>tf <cmd>NERDTreeFocusToggle<cr>
+nnoremap <leader>tt <cmd>Neotree toggle<cr>
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
@@ -270,6 +240,7 @@ map <ScrollWheelUp> k
 " custom keybindings
 au Filetype clojure nnoremap <leader>rst <cmd>ConjureEval (do (rules.core/reset-rules!) (rules.core/reset-loader!))<cr>
 
-" conjure setup
-lua require('conjure')
-lua require('treesitter')
+" lua setup
+lua require('conjure-setup')
+lua require('treesitter-setup')
+lua require('neo-tree-setup')
