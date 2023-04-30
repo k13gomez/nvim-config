@@ -68,7 +68,7 @@ Plug 'hashivim/vim-terraform'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-dotenv'
-Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+Plug 'NLKNguyen/papercolor-theme'
 Plug 'HiPhish/nvim-ts-rainbow2'
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'MunifTanjim/nui.nvim'
@@ -80,7 +80,7 @@ call plug#end()
 " color settings
 set termguicolors
 set background=dark
-colorscheme tokyonight-night
+colorscheme PaperColor
 set guifont=Monaco:h14
 highlight Pmenu ctermbg=Black guibg=Black
 
