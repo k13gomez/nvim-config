@@ -132,6 +132,8 @@ nnoremap <leader>now <cmd>call DateTimeNow()<cr>
 nnoremap <leader>xml <cmd>call DoPrettyXML()<cr>
 nnoremap <leader>json <cmd>call DoPrettyJSON()<cr>
 nnoremap <leader>tt <cmd>Neotree toggle<cr>
+nnoremap <nowait>gt <cmd>Neotree close<cr><cmd>tabnext<cr>
+nnoremap <nowait>gT <cmd>Neotree close<cr><cmd>tabprevious<cr>
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
