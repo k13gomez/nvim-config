@@ -75,6 +75,7 @@ Plug 'MunifTanjim/nui.nvim'
 Plug 'nvim-neo-tree/neo-tree.nvim'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'sheerun/vim-polyglot'
+Plug 'eraserhd/parinfer-rust'
 
 call plug#end()
 
@@ -160,6 +161,8 @@ nnoremap <leader>,<<< <cmd>horizontal resize -10<cr>
 nnoremap <leader>,>>>> <cmd>horizontal resize +20<cr>
 nnoremap <leader>,<<<< <cmd>horizontal resize -20<cr>
 nnoremap <leader>repl <cmd>ConjureCljConnectPortFile<cr>
+nnoremap <leader>par <cmd>ParinferOn<cr>
+nnoremap <leader>nopar <cmd>ParinferOff<cr>
 nnoremap <leader>gg <cmd>GitGutterEnable<cr>
 nnoremap <leader>rns <cmd>ConjureEval (require (ns-name *ns*) :reload)<cr>
 nnoremap <leader>lib <cmd>call FindLibraryVersions()<cr>
