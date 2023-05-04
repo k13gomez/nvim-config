@@ -86,6 +86,12 @@ highlight Pmenu ctermbg=Black guibg=Black
 
 " BEGIN: Helpers
 " Utility functions
+function! FindLibraryVersions()
+    let lib = expand('<cword>')
+    let cmd = "(do (require '[clojure.edn] '[clojure.tools.deps] '[clojure.tools.deps.extensions] '[clojure.tools.deps.util.maven]) (let [mvn-repos (->> (slurp \"deps.edn\") clojure.edn/read-string :mvn/repos (merge clojure.tools.deps.util.maven/standard-repos)) types (distinct (into [:mvn :git] (clojure.tools.deps.extensions/procurer-types))) lib '" . lib . " procurer {:mvn/repos mvn-repos}] (->> (some #(clojure.tools.deps.extensions/find-versions lib nil % procurer) types) (reverse) (take 10) (vec))))"
+    execute "ConjureEval " . cmd
+endfunction
+
 function! DoPrettyXML()
   silent %!xmllint --format -
 endfunction
@@ -132,8 +138,6 @@ nnoremap <leader>now <cmd>call DateTimeNow()<cr>
 nnoremap <leader>xml <cmd>call DoPrettyXML()<cr>
 nnoremap <leader>json <cmd>call DoPrettyJSON()<cr>
 nnoremap <leader>tt <cmd>Neotree toggle<cr>
-nnoremap <nowait>gt <cmd>Neotree close<cr><cmd>tabnext<cr>
-nnoremap <nowait>gT <cmd>Neotree close<cr><cmd>tabprevious<cr>
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
@@ -156,6 +160,8 @@ nnoremap <leader>,>>>> <cmd>horizontal resize +20<cr>
 nnoremap <leader>,<<<< <cmd>horizontal resize -20<cr>
 nnoremap <leader>repl <cmd>ConjureCljConnectPortFile<cr>
 nnoremap <leader>gg <cmd>GitGutterEnable<cr>
+nnoremap <leader>rns <cmd>ConjureEval (require (ns-name *ns*) :reload)<cr>
+nnoremap <leader>lib <cmd>call FindLibraryVersions()<cr>
 
 " mouse support
 set mouse=a
