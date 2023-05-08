@@ -76,6 +76,7 @@ Plug 'nvim-neo-tree/neo-tree.nvim'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'sheerun/vim-polyglot'
 Plug 'eraserhd/parinfer-rust'
+Plug 'k13gomez/cmp-clojure-deps'
 
 call plug#end()
 

@@ -1,7 +1,23 @@
 -- Set up nvim-cmp.
-local cmp = require'cmp'
+local cmp = require('cmp')
+local compare = require('cmp.config.compare')
+
+require('cmp-clojure-deps').setup({})
 
 cmp.setup({
+sorting = {
+  comparators = {
+    compare.exact,
+    compare.score,
+    compare.order,
+    compare.offset,
+    compare.recently_used,
+    compare.locality,
+    compare.kind,
+    compare.sort_text,
+    compare.length
+  }
+},
 snippet = {
   -- REQUIRED - you must specify a snippet engine
   expand = function(args)
@@ -20,6 +36,7 @@ mapping = cmp.mapping.preset.insert({
   ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 }),
 sources = cmp.config.sources({
+  { name = 'clojure-tools-deps' },
   { name = 'nvim_lsp' },
   { name = 'vsnip' },
   { name = 'conjure'},
