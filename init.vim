@@ -95,6 +95,20 @@ function! FindLibraryVersions()
     execute "ConjureEval " . cmd
 endfunction
 
+" BEGIN: Helpers
+" Utility functions
+function! RunClojureTest()
+    let testvar = expand('<cword>')
+    let cmd = "(do (require '[clojure.test]) (clojure.test/test-var #'" . testvar . "))"
+    execute "ConjureEval " . cmd
+endfunction
+
+function! EvalClojureFn()
+    let fnvar = expand('<cword>')
+    let cmd = "(" . fnvar . ")"
+    execute "ConjureEval " . cmd
+endfunction
+
 function! DoPrettyXML()
   silent %!xmllint --format -
 endfunction
@@ -140,7 +154,7 @@ nnoremap <leader>eid <cmd>call EmptyGuid()<cr>
 nnoremap <leader>now <cmd>call DateTimeNow()<cr>
 nnoremap <leader>xml <cmd>call DoPrettyXML()<cr>
 nnoremap <leader>json <cmd>call DoPrettyJSON()<cr>
-nnoremap <leader>tt <cmd>Neotree toggle<cr>
+nnoremap <leader>tt <cmd>Neotree toggle position=right<cr>
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
@@ -165,8 +179,6 @@ nnoremap <leader>repl <cmd>ConjureCljConnectPortFile<cr>
 nnoremap <leader>par <cmd>ParinferOn<cr>
 nnoremap <leader>nopar <cmd>ParinferOff<cr>
 nnoremap <leader>gg <cmd>GitGutterEnable<cr>
-nnoremap <leader>rns <cmd>ConjureEval (require (ns-name *ns*) :reload)<cr>
-nnoremap <leader>lib <cmd>call FindLibraryVersions()<cr>
 
 " mouse support
 set mouse=a
@@ -174,7 +186,12 @@ map <ScrollWheelDown> j
 map <ScrollWheelUp> k
 
 " custom keybindings
-au Filetype clojure nnoremap <leader>rst <cmd>ConjureEval (do (rules.core/reset-rules!) (rules.core/reset-loader!))<cr>
+nnoremap <leader>lib <cmd>call FindLibraryVersions()<cr>
+nnoremap <leader>test <cmd>call RunClojureTest()<cr>
+nnoremap <leader>efn <cmd>call EvalClojureFn()<cr>
+nnoremap <leader>,test <cmd>ConjureEval (clojure.test/run-tests)<cr>
+nnoremap <leader>rns <cmd>ConjureEval (require (ns-name *ns*) :reload)<cr>
+nnoremap <leader>rst <cmd>ConjureEval (do (rules.core/reset-rules!) (rules.core/reset-loader!))<cr>
 
 " lua setup
 lua require('conjure-setup')
