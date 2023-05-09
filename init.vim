@@ -178,6 +178,19 @@ nnoremap <leader>repl <cmd>ConjureCljConnectPortFile<cr>
 nnoremap <leader>par <cmd>ParinferOn<cr>
 nnoremap <leader>nopar <cmd>ParinferOff<cr>
 nnoremap <leader>gg <cmd>GitGutterEnable<cr>
+" Go to tab by number
+au TabLeave * let g:lasttab = tabpagenr()
+nnoremap <leader>` :exe "tabn ".g:lasttab<cr>
+nnoremap <leader>1 1gt<cr>
+nnoremap <leader>2 2gt<cr>
+nnoremap <leader>3 3gt<cr>
+nnoremap <leader>4 4gt<cr>
+nnoremap <leader>5 5gt<cr>
+nnoremap <leader>6 6gt<cr>
+nnoremap <leader>7 7gt<cr>
+nnoremap <leader>8 8gt<cr>
+nnoremap <leader>9 9gt<cr>
+nnoremap <leader>0 :tablast<cr>
 
 " mouse support
 set mouse=a
@@ -217,6 +230,7 @@ function! Tabline()
   return s
 endfunction
 
+set showtabline=2
 set tabline=%!Tabline()
 " END: tabline configuration
 
