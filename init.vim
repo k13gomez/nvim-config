@@ -148,6 +148,7 @@ set backspace=indent,eol,start
 let mapleader=","
 let maplocalleader=","
 nnoremap <leader>sv <cmd>source $MYVIMRC<cr>
+nnoremap <leader>tab <cmd>tabnew<cr>
 nnoremap <leader>uid <cmd>call Guid()<cr>
 nnoremap <leader>eid <cmd>call EmptyGuid()<cr>
 nnoremap <leader>now <cmd>call DateTimeNow()<cr>
