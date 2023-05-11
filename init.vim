@@ -76,6 +76,7 @@ Plug 'nvim-neo-tree/neo-tree.nvim'
 Plug 'sheerun/vim-polyglot'
 Plug 'eraserhd/parinfer-rust'
 Plug 'k13gomez/cmp-clojure-deps'
+Plug 'tpope/vim-commentary'
 
 call plug#end()
 
