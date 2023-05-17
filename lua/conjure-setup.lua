@@ -39,7 +39,13 @@ sources = cmp.config.sources({
   { name = 'clojure-tools-deps' },
   { name = 'nvim_lsp' },
   { name = 'vsnip' },
-  { name = 'path' },
+  { name = 'path',
+    option = {
+      get_cwd = function(params)
+        return vim.fn.getcwd()
+      end,
+    }
+  },
   { name = 'conjure'},
 }, {
   { name = 'buffer' },
