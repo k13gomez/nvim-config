@@ -2,6 +2,12 @@
 local cmp = require('cmp')
 local compare = require('cmp.config.compare')
 
+local path_options = {
+  get_cwd = function(params)
+    return vim.fn.getcwd()
+  end,
+}
+
 require('cmp-clojure-deps').setup({})
 
 cmp.setup({
@@ -39,13 +45,7 @@ sources = cmp.config.sources({
   { name = 'clojure-tools-deps' },
   { name = 'nvim_lsp' },
   { name = 'vsnip' },
-  { name = 'path',
-    option = {
-      get_cwd = function(params)
-        return vim.fn.getcwd()
-      end,
-    }
-  },
+  { name = 'path', option = path_options },
   { name = 'conjure'},
 }, {
   { name = 'buffer' },
@@ -73,7 +73,7 @@ sources = {
 cmp.setup.cmdline(':', {
 mapping = cmp.mapping.preset.cmdline(),
 sources = cmp.config.sources({
-  { name = 'path' }
+  { name = 'path', option = path_options }
 }, {
   { name = 'cmdline' }
 })
