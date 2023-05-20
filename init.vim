@@ -292,3 +292,11 @@ set statusline+=%0*\ %{toupper(g:currentmode[mode()])}\  " The current mode
 lua require('conjure-setup')
 lua require('treesitter-setup')
 lua require('neo-tree-setup')
+
+" terraform setup
+lua <<EOF
+  require'lspconfig'.terraformls.setup{}
+EOF
+
+autocmd BufWritePre *.tfvars lua vim.lsp.buf.format()
+autocmd BufWritePre *.tf lua vim.lsp.buf.format()
