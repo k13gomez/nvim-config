@@ -65,7 +65,6 @@ Plug 'PaterJason/cmp-conjure'
 Plug 'deoplete-plugins/deoplete-lsp'
 Plug 'Shougo/deoplete.nvim'
 Plug 'hashivim/vim-terraform'
-Plug 'vim-syntastic/syntastic'
 Plug 'juliosueiras/vim-terraform-completion'
 
 " can't live without these too
@@ -295,23 +294,20 @@ set statusline+=%0*\ %{toupper(g:currentmode[mode()])}\  " The current mode
 
 " END: status line configuration
 
-" terraform configuration
-" (Optional) Enable terraform plan to be include in filter
-let g:syntastic_terraform_tffilter_plan = 1
-" (Optional) Default: 0, enable(1)/disable(0) plugin's keymapping
-let g:terraform_completion_keys = 1
-" (Optional) Default: 1, enable(1)/disable(0) terraform module registry completion
-let g:terraform_registry_module_completion = 1
-
 " lua setup
 lua require('conjure-setup')
 lua require('treesitter-setup')
 lua require('neo-tree-setup')
 
 " terraform setup
+let g:deoplete#enable_at_startup = 0
 lua <<EOF
   require'lspconfig'.terraformls.setup{}
 EOF
-
 autocmd BufWritePre *.tfvars lua vim.lsp.buf.format()
 autocmd BufWritePre *.tf lua vim.lsp.buf.format()
+autocmd FileType terraform call deoplete#custom#buffer_option('auto_complete', v:true)
+" (Optional) Default: 0, enable(1)/disable(0) plugin's keymapping
+let g:terraform_completion_keys = 1
+" (Optional) Default: 1, enable(1)/disable(0) terraform module registry completion
+let g:terraform_registry_module_completion = 1

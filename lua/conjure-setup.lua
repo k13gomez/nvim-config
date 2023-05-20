@@ -1,6 +1,12 @@
 -- Set up nvim-cmp.
 local cmp = require('cmp')
-local compare = require('cmp.config.compare')
+local cmp_nvim_lsp = require('cmp_nvim_lsp')
+local cmp_clojure_deps = require('cmp-clojure-deps')
+local lspconfig = require('lspconfig')
+
+-- setup sources
+cmp_nvim_lsp.setup({})
+cmp_clojure_deps.setup({})
 
 local path_options = {
   get_cwd = function(params)
@@ -8,80 +14,84 @@ local path_options = {
   end,
 }
 
-require('cmp-clojure-deps').setup({})
+local compare = require('cmp.config.compare')
 
 cmp.setup({
-sorting = {
-  comparators = {
-    compare.exact,
-    compare.score,
-    compare.order,
-    compare.offset,
-    compare.recently_used,
-    compare.locality,
-    compare.kind,
-    compare.sort_text,
-    compare.length
-  }
-},
-snippet = {
-  -- REQUIRED - you must specify a snippet engine
-  expand = function(args)
-    vim.fn["vsnip#anonymous"](args.body)
-  end,
-},
-window = {
-  -- completion = cmp.config.window.bordered(),
-  -- documentation = cmp.config.window.bordered(),
-},
-mapping = cmp.mapping.preset.insert({
-  ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-  ['<C-f>'] = cmp.mapping.scroll_docs(4),
-  ['<C-Space>'] = cmp.mapping.complete(),
-  ['<C-e>'] = cmp.mapping.abort(),
-  ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-}),
-sources = cmp.config.sources({
-  { name = 'clojure-tools-deps' },
-  { name = 'nvim_lsp' },
-  { name = 'vsnip' },
-  { name = 'path', option = path_options },
-  { name = 'conjure'},
-}, {
-  { name = 'buffer' },
-})
-})
+    formatting = {
+        format = function (entry, vim_item)
+            vim_item.dup = { buffer = 0, path = 0, nvim_lsp = 0, conjure = 0 }
+            return vim_item
+        end
+    },
+    sorting = {
+      comparators = {
+        compare.exact,
+        compare.score,
+        compare.order,
+        compare.offset,
+        compare.recently_used,
+        compare.locality,
+        compare.kind,
+        compare.sort_text,
+        compare.length
+      }
+    },
+    snippet = {
+      -- REQUIRED - you must specify a snippet engine
+      expand = function(args)
+        vim.fn["vsnip#anonymous"](args.body)
+      end,
+    },
+    window = {
+      -- completion = cmp.config.window.bordered(),
+      -- documentation = cmp.config.window.bordered(),
+    },
+    mapping = cmp.mapping.preset.insert({
+        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-e>'] = cmp.mapping.abort(),
+        ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+      }),
+    sources = cmp.config.sources({
+        { name = 'clojure-tools-deps', dup = 0 },
+        { name = 'nvim_lsp', dup = 0 },
+        { name = 'vsnip' },
+        { name = 'path', option = path_options, dup = 0 },
+        { name = 'conjure', dup = 0},
+      }, {
+        { name = 'buffer', dup = 0 },
+      })
+  })
 
 -- Set configuration for specific filetype.
 cmp.setup.filetype('gitcommit', {
-sources = cmp.config.sources({
-  { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
-}, {
-  { name = 'buffer' },
-})
-})
+    sources = cmp.config.sources({
+        { name = 'cmp_git', dup = 0 }, -- You can specify the `cmp_git` source if you were installed it.
+        }, {
+          { name = 'buffer', dup = 0 },
+        })
+    })
 
 -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline({ '/', '?' }, {
-mapping = cmp.mapping.preset.cmdline(),
-sources = {
-  { name = 'buffer' }
-}
-})
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+      { name = 'buffer', dup = 0 }
+    }
+  })
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(':', {
-mapping = cmp.mapping.preset.cmdline(),
-sources = cmp.config.sources({
-  { name = 'path', option = path_options }
-}, {
-  { name = 'cmdline' }
-})
-})
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+        { name = 'path', option = path_options, dup = 0 }
+      }, {
+        { name = 'cmdline', dup = 0 }
+      })
+  })
 
 -- Set up lspconfig.
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
 local error = "LspDiagnosticsSignError"
 local warn = "LspDiagnosticsSignWarn"
 local info = "LspDiagnosticsSignInfo"
@@ -119,4 +129,11 @@ vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>lw", ":lua require('telescope.b
 vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>lr", ":lua require('telescope.builtin').lsp_references()<cr>", {noremap = true})
 return vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>li", ":lua require('telescope.builtin').lsp_implementations()<cr>", {noremap = true})
 end
-require'lspconfig'.clojure_lsp.setup({on_attach = on_attach, handlers = handlers, capabilities = capabilities})
+
+local capabilities = vim.tbl_deep_extend(
+  'force',
+  lspconfig.util.default_config.capabilities,
+  cmp_nvim_lsp.default_capabilities()
+)
+
+lspconfig.clojure_lsp.setup({on_attach = on_attach, handlers = handlers, capabilities = capabilities})
