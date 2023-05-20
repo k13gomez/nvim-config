@@ -61,10 +61,17 @@ Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'PaterJason/cmp-conjure'
 
+" terraform setup, not ideal
+Plug 'deoplete-plugins/deoplete-lsp'
+Plug 'Shougo/deoplete.nvim'
+Plug 'hashivim/vim-terraform'
+Plug 'vim-syntastic/syntastic'
+Plug 'juliosueiras/vim-terraform-completion'
+
+" can't live without these too
 Plug 'mhinz/vim-startify'
 Plug 'guns/vim-sexp'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
-Plug 'hashivim/vim-terraform'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-dotenv'
@@ -287,6 +294,14 @@ set statusline+=\ [%b][0x%B]\                            " ASCII and byte code u
 set statusline+=%0*\ %{toupper(g:currentmode[mode()])}\  " The current mode
 
 " END: status line configuration
+
+" terraform configuration
+" (Optional) Enable terraform plan to be include in filter
+let g:syntastic_terraform_tffilter_plan = 1
+" (Optional) Default: 0, enable(1)/disable(0) plugin's keymapping
+let g:terraform_completion_keys = 1
+" (Optional) Default: 1, enable(1)/disable(0) terraform module registry completion
+let g:terraform_registry_module_completion = 1
 
 " lua setup
 lua require('conjure-setup')
