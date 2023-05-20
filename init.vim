@@ -200,6 +200,21 @@ nnoremap <leader>8 8gt<cr>
 nnoremap <leader>9 9gt<cr>
 nnoremap <leader>0 :tablast<cr>
 
+" vsnip bindings
+" Expand
+inoremap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+snoremap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+
+" Expand or jump
+inoremap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+snoremap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+
+" Jump forward or backward
+inoremap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+snoremap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+inoremap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+snoremap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+
 " mouse support
 set mouse=a
 map <ScrollWheelDown> j
@@ -299,7 +314,8 @@ lua require('conjure-setup')
 lua require('treesitter-setup')
 lua require('neo-tree-setup')
 
-" terraform setup
+" terraform setup uses deoplete for better auto completion than what we get
+" from terraform-ls
 let g:deoplete#enable_at_startup = 0
 lua <<EOF
   require'lspconfig'.terraformls.setup{}
