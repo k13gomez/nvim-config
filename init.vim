@@ -310,7 +310,7 @@ set statusline+=%0*\ %{toupper(g:currentmode[mode()])}\  " The current mode
 " END: status line configuration
 
 " lua setup
-lua require('conjure-setup')
+lua require('lsp-setup')
 lua require('treesitter-setup')
 lua require('neo-tree-setup')
 
