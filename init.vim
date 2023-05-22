@@ -227,6 +227,7 @@ nnoremap <leader>efn <cmd>call EvalClojureFn()<cr>
 nnoremap <leader>,test <cmd>ConjureEval (clojure.test/run-tests)<cr>
 nnoremap <leader>rns <cmd>ConjureEval (require (ns-name *ns*) :reload)<cr>
 nnoremap <leader>rst <cmd>ConjureEval (do (rules.core/reset-rules!) (rules.core/reset-loader!))<cr>
+nnoremap <leader>hto <cmd>ConjureEval (do (require '[pjstadig.humane-test-output]) (pjstadig.humane-test-output/activate!))<cr>
 
 " BEGIN: tabline configuration
 function! Tabline()
