@@ -109,6 +109,12 @@ function! RunClojureTest()
     execute "ConjureEval " . cmd
 endfunction
 
+function! RunClojureTests()
+    let testvar = expand('<cword>')
+    let cmd = "(do (require '[clojure.test]) (clojure.test/run-tests))"
+    execute "ConjureEval " . cmd
+endfunction
+
 function! EvalClojureFn()
     let fnvar = expand('<cword>')
     let cmd = "(" . fnvar . ")"
@@ -222,7 +228,8 @@ map <ScrollWheelUp> k
 
 " custom keybindings
 nnoremap <leader>lib <cmd>call FindLibraryVersions()<cr>
-nnoremap <leader>test <cmd>call RunClojureTest()<cr>
+nnoremap <leader>tone <cmd>call RunClojureTest()<cr>
+nnoremap <leader>tall <cmd>call RunClojureTests()<cr>
 nnoremap <leader>efn <cmd>call EvalClojureFn()<cr>
 nnoremap <leader>,test <cmd>ConjureEval (clojure.test/run-tests)<cr>
 nnoremap <leader>rns <cmd>ConjureEval (require (ns-name *ns*) :reload)<cr>
