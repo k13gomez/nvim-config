@@ -83,6 +83,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'eraserhd/parinfer-rust'
 Plug 'k13gomez/cmp-clojure-deps'
 Plug 'tpope/vim-commentary'
+Plug 'freitass/todo.txt-vim'
 
 call plug#end()
 
@@ -235,6 +236,7 @@ nnoremap <leader>,test <cmd>ConjureEval (clojure.test/run-tests)<cr>
 nnoremap <leader>rns <cmd>ConjureEval (require (ns-name *ns*) :reload)<cr>
 nnoremap <leader>rst <cmd>ConjureEval (do (rules.core/reset-rules!) (rules.core/reset-loader!))<cr>
 nnoremap <leader>hto <cmd>ConjureEval (do (require '[pjstadig.humane-test-output]) (pjstadig.humane-test-output/activate!))<cr>
+nnoremap <leader>todo <cmd>tabedit ~/todo.txt<cr>
 
 " BEGIN: tabline configuration
 function! Tabline()
