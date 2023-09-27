@@ -146,6 +146,13 @@ vim.command("normal i00000000-0000-0000-0000-000000000000")
 EOF
 endfunction
 
+function! Hash()
+python3 << EOF
+import uuid, hashlib, vim
+vim.command("normal i" + hashlib.md5(uuid.uuid4().bytes).hexdigest())
+EOF
+endfunction
+
 function! DateTimeNow()
 python3 << EOF
 import time, vim
@@ -163,6 +170,7 @@ let mapleader=","
 let maplocalleader=","
 nnoremap <leader>sv <cmd>source $MYVIMRC<cr>
 nnoremap <leader>tab <cmd>tabnew<cr>
+nnoremap <leader>md5 <cmd>call Hash()<cr>
 nnoremap <leader>uid <cmd>call Guid()<cr>
 nnoremap <leader>eid <cmd>call EmptyGuid()<cr>
 nnoremap <leader>now <cmd>call DateTimeNow()<cr>
