@@ -332,6 +332,9 @@ lua require('lsp-setup')
 lua require('treesitter-setup')
 lua require('neo-tree-setup')
 
+" clojure indent
+let g:clojure_maxlines = 2000
+
 " terraform setup uses deoplete for better auto completion than what we get
 " from terraform-ls
 let g:deoplete#enable_at_startup = 0
