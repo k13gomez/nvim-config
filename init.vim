@@ -207,6 +207,7 @@ nnoremap <leader>repl <cmd>ConjureCljConnectPortFile<cr>
 nnoremap <leader>par <cmd>ParinferOn<cr>
 nnoremap <leader>nopar <cmd>ParinferOff<cr>
 nnoremap <leader>gg <cmd>GitGutterEnable<cr>
+nnoremap <leader>rt <cmd>retab<cr>
 nnoremap <silent>ff <cmd>lua vim.lsp.buf.format({async=true})<cr>
 vnoremap <silent>ff <cmd>lua vim.lsp.buf.format({async=true})<cr>
 
