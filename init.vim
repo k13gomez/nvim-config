@@ -61,6 +61,12 @@ Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'PaterJason/cmp-conjure'
 
+" lets go
+Plug 'fatih/vim-go'
+
+" rust up
+Plug 'rust-lang/rust.vim'
+
 " terraform setup, not ideal
 Plug 'deoplete-plugins/deoplete-lsp'
 Plug 'Shougo/deoplete.nvim'
@@ -201,6 +207,9 @@ nnoremap <leader>repl <cmd>ConjureCljConnectPortFile<cr>
 nnoremap <leader>par <cmd>ParinferOn<cr>
 nnoremap <leader>nopar <cmd>ParinferOff<cr>
 nnoremap <leader>gg <cmd>GitGutterEnable<cr>
+nnoremap <silent>ff <cmd>lua vim.lsp.buf.format({async=true})<cr>
+vnoremap <silent>ff <cmd>lua vim.lsp.buf.format({async=true})<cr>
+
 " Go to tab by number
 au TabLeave * let g:lasttab = tabpagenr()
 nnoremap <leader>` :exe "tabn ".g:lasttab<cr>
