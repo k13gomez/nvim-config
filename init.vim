@@ -128,6 +128,10 @@ function! EvalClojureFn()
     execute "ConjureEval " . cmd
 endfunction
 
+function! EnableClojureWarnOnReflection()
+    execute "ConjureEval (set! *warn-on-reflection* true)"
+endfunction
+
 function! DoPrettyXML()
   silent %!xmllint --format -
 endfunction
@@ -248,6 +252,7 @@ nnoremap <leader>lib <cmd>call FindLibraryVersions()<cr>
 nnoremap <leader>tone <cmd>call RunClojureTest()<cr>
 nnoremap <leader>tall <cmd>call RunClojureTests()<cr>
 nnoremap <leader>efn <cmd>call EvalClojureFn()<cr>
+nnoremap <leader>wrf <cmd> call EnableClojureWarnOnReflection()<cr>
 nnoremap <leader>,test <cmd>ConjureEval (clojure.test/run-tests)<cr>
 nnoremap <leader>rns <cmd>ConjureEval (require (ns-name *ns*) :reload)<cr>
 nnoremap <leader>rst <cmd>ConjureEval (do (rules.core/reset-rules!) (rules.core/reset-loader!))<cr>
