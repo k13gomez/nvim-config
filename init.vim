@@ -60,6 +60,8 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'PaterJason/cmp-conjure'
+Plug 'junegunn/vim-easy-align' " https://github.com/junegunn/vim-easy-align
+Plug 'endaaman/vim-case-master'
 
 " lets go
 Plug 'fatih/vim-go'
@@ -212,6 +214,23 @@ nnoremap <leader>par <cmd>ParinferOn<cr>
 nnoremap <leader>nopar <cmd>ParinferOff<cr>
 nnoremap <leader>gg <cmd>GitGutterEnable<cr>
 nnoremap <leader>rt <cmd>retab<cr>
+" case master bindings
+nnoremap <silent>case <cmd>CaseMasterRotateCase<cr>
+vnoremap <silent>case <cmd>CaseMasterRotateCaseVisual<cr>
+nnoremap <silent>css <cmd>CaseMasterConvertToSnake<cr>
+nnoremap <silent>csk <cmd>CaseMasterConvertToKebab<cr>
+nnoremap <silent>csc <cmd>CaseMasterConvertToCamel<cr>
+nnoremap <silent>csp <cmd>CaseMasterConvertToPascal<cr>
+nnoremap <silent>csm <cmd>CaseMasterConvertToMacro<cr>
+vnoremap <silent>css <cmd>CaseMasterConvertToSnake<cr>
+vnoremap <silent>csk <cmd>CaseMasterConvertToKebab<cr>
+vnoremap <silent>csc <cmd>CaseMasterConvertToCamel<cr>
+vnoremap <silent>csp <cmd>CaseMasterConvertToPascal<cr>
+vnoremap <silent>csm <cmd>CaseMasterConvertToMacro<cr>
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xnoremap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nnoremap ga <Plug>(EasyAlign)
 
 " Go to tab by number
 au TabLeave * let g:lasttab = tabpagenr()
