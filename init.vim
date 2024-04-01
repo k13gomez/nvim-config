@@ -60,6 +60,7 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'PaterJason/cmp-conjure'
+Plug 'onsails/lspkind.nvim'
 Plug 'junegunn/vim-easy-align' " https://github.com/junegunn/vim-easy-align
 Plug 'endaaman/vim-case-master'
 
