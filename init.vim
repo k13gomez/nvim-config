@@ -61,6 +61,7 @@ Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'PaterJason/cmp-conjure'
 Plug 'onsails/lspkind.nvim'
+Plug 'mustache/vim-mustache-handlebars'
 Plug 'junegunn/vim-easy-align' " https://github.com/junegunn/vim-easy-align
 Plug 'endaaman/vim-case-master'
 
@@ -133,6 +134,10 @@ endfunction
 
 function! EnableClojureWarnOnReflection()
     execute "ConjureEval (set! *warn-on-reflection* true)"
+endfunction
+
+function! GetClojurePID()
+    execute "ConjureEval (.. (java.lang.ProcessHandle/current) (pid))"
 endfunction
 
 function! DoPrettyXML()
@@ -272,6 +277,7 @@ nnoremap <leader>lib <cmd>call FindLibraryVersions()<cr>
 nnoremap <leader>tone <cmd>call RunClojureTest()<cr>
 nnoremap <leader>tall <cmd>call RunClojureTests()<cr>
 nnoremap <leader>efn <cmd>call EvalClojureFn()<cr>
+nnoremap <leader>pid <cmd> call GetClojurePID()<cr>
 nnoremap <leader>wrf <cmd> call EnableClojureWarnOnReflection()<cr>
 nnoremap <leader>,test <cmd>ConjureEval (clojure.test/run-tests)<cr>
 nnoremap <leader>rns <cmd>ConjureEval (require (ns-name *ns*) :reload)<cr>
@@ -293,7 +299,7 @@ function! Tabline()
     let s .= '%' . tab . 'T'
     let s .= (tab == tabpagenr() ? '%#TabLineSel#' : '%#TabLine#')
     let s .= ' ' . tab .':'
-    let s .= (bufname != '' ? '['. fnamemodify(bufname, ':.') . '] ' : '[No Name] ')
+    let s .= (bufname != '' ? '['. fnamemodify(bufname, ':h:t') . '/' . fnamemodify(bufname, ':t') . '] ' : '[No Name] ')
 
     if bufmodified
       let s .= '[+] '
@@ -364,6 +370,9 @@ set statusline+=%0*\ %{toupper(g:currentmode[mode()])}\  " The current mode
 lua require('lsp-setup')
 lua require('treesitter-setup')
 lua require('neo-tree-setup')
+
+" mustache
+let g:mustache_abbreviations = 1
 
 " clojure indent
 let g:clojure_fuzzy_indent = 1
