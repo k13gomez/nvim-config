@@ -112,6 +112,20 @@ endfunction
 
 " BEGIN: Helpers
 " Utility functions
+function! ClojureTapExpression()
+    let testvar = expand('<cword>')
+    let cmd = "(tap> " . testvar . ")"
+    execute "ConjureEval " . cmd
+endfunction
+
+function! ClojureAddTapExpression()
+    execute "ConjureEval (add-tap #'println)"
+endfunction
+
+function! ClojureRemTapExpression()
+    execute "ConjureEval (remove-tap #'println)"
+endfunction
+
 function! RunClojureTest()
     let testvar = expand('<cword>')
     let cmd = "(do (require '[clojure.test]) (clojure.test/test-var #'" . testvar . "))"
@@ -272,6 +286,9 @@ map <ScrollWheelUp> k
 
 " custom keybindings
 nnoremap <leader>lib <cmd>call FindLibraryVersions()<cr>
+nnoremap <leader>tap <cmd>call ClojureTapExpression()<cr>
+nnoremap <leader>ptap <cmd>call ClojureAddTapExpression()<cr>
+nnoremap <leader>rtap <cmd>call ClojureRemTapExpression()<cr>
 nnoremap <leader>tone <cmd>call RunClojureTest()<cr>
 nnoremap <leader>tall <cmd>call RunClojureTests()<cr>
 nnoremap <leader>efn <cmd>call EvalClojureFn()<cr>
