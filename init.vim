@@ -91,6 +91,8 @@ Plug 'MunifTanjim/nui.nvim'
 Plug 'nvim-neo-tree/neo-tree.nvim'
 Plug 'sheerun/vim-polyglot'
 Plug 'gpanders/nvim-parinfer'
+" Plug 'eraserhd/parinfer-rust', {'do':
+"        \  'cargo build --release'}
 Plug 'k13gomez/cmp-clojure-deps'
 Plug 'tpope/vim-commentary'
 Plug 'freitass/todo.txt-vim'
@@ -121,11 +123,11 @@ function! ClojureTapExpression()
 endfunction
 
 function! ClojureAddTapExpression()
-    execute "ConjureEval (add-tap #'println)"
+    execute "ConjureEval (do (require 'portal.api) (portal.api/open) (add-tap #'portal.api/submit) (add-tap #'println))"
 endfunction
 
 function! ClojureRemTapExpression()
-    execute "ConjureEval (remove-tap #'println)"
+    execute "ConjureEval (do (require 'portal.api) (portal.api/open) (remove-tap #'portal.api/submit) (remove-tap #'println))"
 endfunction
 
 function! RunClojureTest()
@@ -290,6 +292,7 @@ map <ScrollWheelUp> k
 nnoremap <leader>lib <cmd>call FindLibraryVersions()<cr>
 nnoremap <leader>tap <cmd>call ClojureTapExpression()<cr>
 nnoremap <leader>ptap <cmd>call ClojureAddTapExpression()<cr>
+nnoremap <leader>pget <cmd>ConjureEval (do (require 'portal.api) (portal.api/selected))<cr>
 nnoremap <leader>rtap <cmd>call ClojureRemTapExpression()<cr>
 nnoremap <leader>tone <cmd>call RunClojureTest()<cr>
 nnoremap <leader>tall <cmd>call RunClojureTests()<cr>
