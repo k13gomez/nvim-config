@@ -396,7 +396,7 @@ let g:mustache_abbreviations = 1
 
 " clojure indent
 let g:clojure_fuzzy_indent = 1
-let g:clojure_fuzzy_indent_patterns = ['^with', '^def', '^let', '^try', '^thread', '^io-thread', '^compute-thread', '^cond']
+let g:clojure_fuzzy_indent_patterns = ['^with', '^def', '^let', '^try', '^thread', '^cond', '^async']
 let g:clojure_fuzzy_indent_blacklist =
         \ ['-fn$', '\v^with-%(meta|out-str|loading-context)$']
 let g:clojure_special_indent_words =
