@@ -130,16 +130,31 @@ cmp.setup.cmdline(':', {
   })
 })
 
--- Set up lspconfig.
-vim.diagnostic.config({
+-- If you want icons for diagnostic errors, you'll need to define them somewhere:
+vim.diagnostic.config {
   signs = {
-    error = { text = "x", texthl = "LspDiagnosticsSignError" },
-    warn = { text = "!", texthl = "LspDiagnosticsSignWarn" },
-    info = { text = "i", texthl = "LspDiagnosticsSignInfo" },
-    hint = { text = "?", texthl = "LspDiagnosticsSignHint" },
-  },
-})
+    text = {
+      [vim.diagnostic.severity.ERROR] = " ",
+      [vim.diagnostic.severity.WARN] = " ",
+      [vim.diagnostic.severity.INFO] = " ",
+      [vim.diagnostic.severity.HINT] = "",
+    },
+    numhl = {
+      [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+      [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+      [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+      [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+    },
+    texthl = {
+      [vim.diagnostic.severity.ERROR] = "LspDiagnosticSignError",
+      [vim.diagnostic.severity.WARN] = "LspDiagnosticSignWarn",
+      [vim.diagnostic.severity.INFO] = "LspDiagnosticSignInfo",
+      [vim.diagnostic.severity.HINT] = "LspDiagnosticSignHint",
+    }
+  }
+}
 
+-- Set up lspconfig.
 local handlers = {
   ["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
     severity_sort = true,
