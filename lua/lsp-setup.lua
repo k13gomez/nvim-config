@@ -131,14 +131,14 @@ cmp.setup.cmdline(':', {
 })
 
 -- Set up lspconfig.
-local error = "LspDiagnosticsSignError"
-local warn = "LspDiagnosticsSignWarn"
-local info = "LspDiagnosticsSignInfo"
-local hint = "LspDiagnosticsSignHint"
-vim.fn.sign_define(error, { text = "x", texthl = error })
-vim.fn.sign_define(warn, { text = "!", texthl = warn })
-vim.fn.sign_define(info, { text = "i", texthl = info })
-vim.fn.sign_define(hint, { text = "?", texthl = hint })
+vim.diagnostic.config({
+  signs = {
+    error = { text = "x", texthl = "LspDiagnosticsSignError" },
+    warn = { text = "!", texthl = "LspDiagnosticsSignWarn" },
+    info = { text = "i", texthl = "LspDiagnosticsSignInfo" },
+    hint = { text = "?", texthl = "LspDiagnosticsSignHint" },
+  },
+})
 
 local handlers = {
   ["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
