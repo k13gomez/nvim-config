@@ -67,6 +67,7 @@ Plug 'endaaman/vim-case-master'
 
 " copilot
 Plug 'github/copilot.vim'
+Plug 'CopilotC-Nvim/CopilotChat.nvim', {'do':'make tiktoken'}
 
 " lets go
 Plug 'fatih/vim-go'
@@ -390,6 +391,7 @@ set statusline+=%0*\ %{toupper(g:currentmode[mode()])}\  " The current mode
 " END: status line configuration
 
 " lua setup
+lua require('copilot-setup')
 lua require('lsp-setup')
 lua require('treesitter-setup')
 lua require('neo-tree-setup')
