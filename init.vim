@@ -65,6 +65,9 @@ Plug 'mustache/vim-mustache-handlebars'
 Plug 'junegunn/vim-easy-align' " https://github.com/junegunn/vim-easy-align
 Plug 'endaaman/vim-case-master'
 
+" copilot
+Plug 'github/copilot.vim'
+
 " lets go
 Plug 'fatih/vim-go'
 
