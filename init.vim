@@ -75,6 +75,9 @@ Plug 'fatih/vim-go'
 " rust up
 Plug 'rust-lang/rust.vim'
 
+" mix some elixir
+Plug 'elixir-tools/elixir-tools.nvim', { 'tag': 'stable' }
+
 " terraform setup, not ideal
 Plug 'deoplete-plugins/deoplete-lsp'
 Plug 'Shougo/deoplete.nvim'
