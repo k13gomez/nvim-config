@@ -402,6 +402,9 @@ lua require('neo-tree-setup')
 " mustache
 let g:mustache_abbreviations = 1
 
+" disable perl
+let g:loaded_perl_provider = 0
+
 " clojure indent
 let g:clojure_fuzzy_indent = 1
 let g:clojure_fuzzy_indent_patterns = ['^with', '^def', '^let', '^try', '^thread', '^cond', '^async']
