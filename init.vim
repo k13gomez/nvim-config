@@ -48,6 +48,7 @@ set backupdir=~/.cache/vim-backupfiles// " Directory to store backup files.
 call plug#begin('~/.config/nvim/bundle')
 
 Plug 'Olical/conjure' " https://github.com/Olical/conjure
+Plug 'Olical/nfnl'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " https://github.com/nvim-treesitter/nvim-treesitter
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
@@ -393,12 +394,6 @@ set statusline+=%0*\ %{toupper(g:currentmode[mode()])}\  " The current mode
 
 " END: status line configuration
 
-" lua setup
-lua require('copilot-setup')
-lua require('lsp-setup')
-lua require('treesitter-setup')
-lua require('neo-tree-setup')
-
 " mustache
 let g:mustache_abbreviations = 1
 
@@ -418,9 +413,6 @@ let g:clojure_maxlines = 2000
 " terraform setup uses deoplete for better auto completion than what we get
 " from terraform-ls
 let g:deoplete#enable_at_startup = 0
-lua <<EOF
-  require'lspconfig'.terraformls.setup{}
-EOF
 autocmd BufWritePre *.tfvars lua vim.lsp.buf.format()
 autocmd BufWritePre *.tf lua vim.lsp.buf.format()
 autocmd FileType terraform call deoplete#custom#buffer_option('auto_complete', v:true)
@@ -428,3 +420,10 @@ autocmd FileType terraform call deoplete#custom#buffer_option('auto_complete', v
 let g:terraform_completion_keys = 1
 " (Optional) Default: 1, enable(1)/disable(0) terraform module registry completion
 let g:terraform_registry_module_completion = 1
+
+" lua setup
+lua require('fnl-setup')
+lua require('copilot-setup')
+lua require('lsp-setup')
+lua require('treesitter-setup')
+lua require('neo-tree-setup')

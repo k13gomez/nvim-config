@@ -322,3 +322,5 @@ elixir.setup {
     enable = false
   }
 }
+
+lspconfig.terraformls.setup{}
