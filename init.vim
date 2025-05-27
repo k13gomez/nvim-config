@@ -16,7 +16,6 @@ endif
 set nocompatible            " disable compatibility to old-time vi
 set showmatch               " show matching
 set ignorecase              " case insensitive
-set mouse=v                 " middle-click paste with
 set hlsearch                " highlight search
 set incsearch               " incremental search
 set tabstop=4               " number of columns occupied by a tab
@@ -33,7 +32,6 @@ call pathogen#infect()      " must be loaded before enabling file type
 syntax on                   " syntax highlighting
 filetype plugin indent on   " allow auto-indenting depending on file type
 filetype plugin on          " enable plugin files depending on file type
-set mouse=a                 " enable mouse click
 set clipboard=unnamedplus   " using system clipboard
 set cursorline              " highlight current cursorline
 set ttyfast                 " Speed up scrolling in Vim
@@ -426,7 +424,6 @@ let g:terraform_completion_keys = 1
 let g:terraform_registry_module_completion = 1
 
 " lua setup
-lua require('fnl-setup')
 lua require('copilot-setup')
 lua require('lsp-setup')
 lua require('treesitter-setup')
