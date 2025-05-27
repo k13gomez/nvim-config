@@ -76,6 +76,9 @@ Plug 'fatih/vim-go'
 " rust up
 Plug 'rust-lang/rust.vim'
 
+" lua support
+Plug 'ckipp01/stylua-nvim', {'do': 'cargo install stylua'}
+
 " mix some elixir
 Plug 'elixir-tools/elixir-tools.nvim', { 'tag': 'stable' }
 
@@ -307,6 +310,7 @@ nnoremap <leader>tall <cmd>call RunClojureTests()<cr>
 nnoremap <leader>efn <cmd>call EvalClojureFn()<cr>
 nnoremap <leader>pid <cmd> call GetClojurePID()<cr>
 nnoremap <leader>wrf <cmd> call EnableClojureWarnOnReflection()<cr>
+nnoremap <leader>lua <cmd> lua require("stylua-nvim").format_file()<cr>
 nnoremap <leader>,test <cmd>ConjureEval (clojure.test/run-tests)<cr>
 nnoremap <leader>rns <cmd>ConjureEval (require (ns-name *ns*) :reload)<cr>
 nnoremap <leader>rst <cmd>ConjureEval (do (rules.core/reset-rules!) (rules.core/reset-loader!))<cr>
