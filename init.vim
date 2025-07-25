@@ -132,7 +132,7 @@ function! ClojureTapExpression()
 endfunction
 
 function! ClojureAddTapExpression()
-    execute "ConjureEval (do (require 'portal.api) (portal.api/open) (add-tap #'portal.api/submit) (add-tap #'println))"
+    execute "ConjureEval (do (require 'clojure.repl.deps) (clojure.repl.deps/add-lib 'djblue/portal) (require 'portal.api) (portal.api/open) (add-tap #'portal.api/submit) (add-tap #'println))"
 endfunction
 
 function! ClojureRemTapExpression()
