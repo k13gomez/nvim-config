@@ -2,7 +2,7 @@
 local cmp = require("cmp")
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
 local cmp_clojure_deps = require("cmp-clojure-deps")
-local lspconfig = require("lspconfig")
+local lsputil = require("lspconfig.util")
 
 -- setup sources
 cmp_nvim_lsp.setup({})
@@ -154,7 +154,7 @@ vim.diagnostic.config({
   },
 })
 
--- Set up lspconfig.
+-- Set up vim.lsp.config
 local handlers = {
   ["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
     severity_sort = true,
@@ -229,24 +229,25 @@ local function on_attach(client, bufnr)
 end
 
 local capabilities =
-  vim.tbl_deep_extend("force", lspconfig.util.default_config.capabilities, cmp_nvim_lsp.default_capabilities())
+  vim.tbl_deep_extend("force", lsputil.default_config.capabilities, cmp_nvim_lsp.default_capabilities())
 
-lspconfig.clojure_lsp.setup({
+vim.lsp.config('clojure_lsp', {
   on_attach = on_attach,
   handlers = handlers,
   capabilities = capabilities,
   cmd = { "clojure-lsp" },
   filetypes = { "clojure" },
-  root_dir = lspconfig.util.root_pattern("deps.edn", "project.clj", ".git"),
+  root_dir = lsputil.root_pattern("deps.edn", "project.clj", ".git"),
 })
+vim.lsp.enable('clojure_lsp')
 
-lspconfig.rust_analyzer.setup({
+vim.lsp.config('rust_analyzer', {
   on_attach = on_attach,
   handlers = handlers,
   capabilities = capabilities,
   cmd = { "rust-analyzer" },
   filetypes = { "rust" },
-  root_dir = lspconfig.util.root_pattern("Cargo.toml"),
+  root_dir = lsputil.root_pattern("Cargo.toml"),
   settings = {
     ["rust_analyzer"] = {
       cargo = {
@@ -255,14 +256,15 @@ lspconfig.rust_analyzer.setup({
     },
   },
 })
+vim.lsp.enable('rust_analyzer')
 
-lspconfig.gopls.setup({
+vim.lsp.config('gopls', {
   on_attach = on_attach,
   handlers = handlers,
   capabilities = capabilities,
   cmd = { "gopls" },
   filetypes = { "go", "gomod", "gowork", "gotmpl" },
-  root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
+  root_dir = lsputil.root_pattern("go.work", "go.mod", ".git"),
   settings = {
     gopls = {
       completeUnimported = true,
@@ -273,8 +275,9 @@ lspconfig.gopls.setup({
     },
   },
 })
+vim.lsp.enable('gopls')
 
-lspconfig.lua_ls.setup({
+vim.lsp.config('lua_ls', {
   on_attach = on_attach,
   handlers = handlers,
   capabilities = capabilities,
@@ -308,6 +311,7 @@ lspconfig.lua_ls.setup({
     },
   },
 })
+vim.lsp.enable('lua_ls')
 
 local elixir = require("elixir")
 local elixirls = require("elixir.elixirls")
@@ -437,4 +441,5 @@ elixir.setup({
   },
 })
 
-lspconfig.terraformls.setup({})
+vim.lsp.config('terraformls', {})
+vim.lsp.enable('terraformls')
