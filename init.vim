@@ -425,6 +425,7 @@ let g:terraform_registry_module_completion = 1
 
 " lua setup
 lua require('copilot-setup')
-lua require('lsp-setup')
-lua require('treesitter-setup')
 lua require('neo-tree-setup')
+lua require('treesitter-setup')
+lua require('cmp-setup')
+lua require('lsp-setup')
