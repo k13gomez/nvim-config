@@ -125,6 +125,8 @@ elixir.setup({
       suggestSpecs = true,
       fetchDeps = true,
     }),
+    capabilities = capabilities,
+    handlers = handlers,
     on_attach = function(client, bufnr)
       on_attach(client, bufnr)
       vim.api.nvim_buf_set_keymap(bufnr, "n", "efp", "<Cmd>ElixirFromPipe<CR>", { noremap = true })
