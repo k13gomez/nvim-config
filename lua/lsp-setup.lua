@@ -126,113 +126,11 @@ elixir.setup({
       fetchDeps = true,
     }),
     on_attach = function(client, bufnr)
-      vim.bo[bufnr].formatexpr = "v:lua.vim.lsp.formatexpr(#{timeout_ms:1000})"
+      on_attach(client, bufnr)
       vim.api.nvim_buf_set_keymap(bufnr, "n", "efp", "<Cmd>ElixirFromPipe<CR>", { noremap = true })
       vim.api.nvim_buf_set_keymap(bufnr, "n", "etp", "<Cmd>ElixirToPipe<CR>", { noremap = true })
       vim.api.nvim_buf_set_keymap(bufnr, "v", "eem", "<Cmd>ElixirExpandMacro<CR>", { noremap = true })
       vim.api.nvim_buf_set_keymap(bufnr, "n", "ert", "<Cmd>lua vim.lsp.codelens.run()<CR>", { noremap = true })
-
-      vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", { noremap = true })
-      vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", { noremap = true })
-      vim.api.nvim_buf_set_keymap(
-        bufnr,
-        "n",
-        "<leader>ld",
-        "<Cmd>lua vim.lsp.buf.declaration()<CR>",
-        { noremap = true }
-      )
-      vim.api.nvim_buf_set_keymap(
-        bufnr,
-        "n",
-        "<leader>lt",
-        "<cmd>lua vim.lsp.buf.type_definition()<CR>",
-        { noremap = true }
-      )
-      vim.api.nvim_buf_set_keymap(
-        bufnr,
-        "n",
-        "<leader>lh",
-        "<cmd>lua vim.lsp.buf.signature_help()<CR>",
-        { noremap = true }
-      )
-      vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ln", "<cmd>lua vim.lsp.buf.rename()<CR>", { noremap = true })
-      vim.api.nvim_buf_set_keymap(
-        bufnr,
-        "n",
-        "<leader>le",
-        "<cmd>lua vim.diagnostic.open_float()<CR>",
-        { noremap = true }
-      )
-      vim.api.nvim_buf_set_keymap(
-        bufnr,
-        "n",
-        "<leader>lq",
-        "<cmd>lua vim.diagnostic.setloclist()<CR>",
-        { noremap = true }
-      )
-      vim.api.nvim_buf_set_keymap(
-        bufnr,
-        "n",
-        "ff",
-        "<cmd>lua vim.lsp.buf.format({async = true})<CR>",
-        { noremap = true, silent = true }
-      )
-      vim.api.nvim_buf_set_keymap(
-        bufnr,
-        "v",
-        "ff",
-        "<cmd>lua vim.lsp.buf.format({async = true})<CR>",
-        { noremap = true, silent = true }
-      )
-      vim.api.nvim_buf_set_keymap(
-        bufnr,
-        "n",
-        "<leader>lj",
-        "<cmd>lua vim.diagnostic.goto_next()<CR>",
-        { noremap = true }
-      )
-      vim.api.nvim_buf_set_keymap(
-        bufnr,
-        "n",
-        "<leader>lk",
-        "<cmd>lua vim.diagnostic.goto_prev()<CR>",
-        { noremap = true }
-      )
-      vim.api.nvim_buf_set_keymap(
-        bufnr,
-        "n",
-        "<leader>la",
-        "<cmd>lua vim.lsp.buf.code_action()<CR>",
-        { noremap = true }
-      )
-      vim.api.nvim_buf_set_keymap(
-        bufnr,
-        "v",
-        "<leader>la",
-        "<cmd>lua vim.lsp.buf.range_code_action()<CR> ",
-        { noremap = true }
-      )
-      vim.api.nvim_buf_set_keymap(
-        bufnr,
-        "n",
-        "<leader>lw",
-        ":lua require('telescope.builtin').diagnostics()<cr>",
-        { noremap = true }
-      )
-      vim.api.nvim_buf_set_keymap(
-        bufnr,
-        "n",
-        "<leader>lr",
-        ":lua require('telescope.builtin').lsp_references()<cr>",
-        { noremap = true }
-      )
-      return vim.api.nvim_buf_set_keymap(
-        bufnr,
-        "n",
-        "<leader>li",
-        ":lua require('telescope.builtin').lsp_implementations()<cr>",
-        { noremap = true }
-      )
     end,
   },
   projectionist = {
