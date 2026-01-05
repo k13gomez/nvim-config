@@ -131,8 +131,12 @@ function! ClojureTapExpression()
     execute "ConjureEval " . cmd
 endfunction
 
+function! ClojureAddLibPortal()
+    execute "ConjureEval (do (require 'clojure.repl.deps) (clojure.repl.deps/add-lib 'djblue/portal))"
+endfunction
+
 function! ClojureAddTapExpression()
-    execute "ConjureEval (do (require 'clojure.repl.deps) (clojure.repl.deps/add-lib 'djblue/portal) (require 'portal.api) (portal.api/open) (add-tap #'portal.api/submit) (add-tap #'println))"
+    execute "ConjureEval (do (require 'portal.api) (portal.api/open) (add-tap #'portal.api/submit) (add-tap #'println))"
 endfunction
 
 function! ClojureRemTapExpression()
@@ -300,6 +304,7 @@ map <ScrollWheelUp> k
 " custom keybindings
 nnoremap <leader>lib <cmd>call FindLibraryVersions()<cr>
 nnoremap <leader>tap <cmd>call ClojureTapExpression()<cr>
+nnoremap <leader>port <cmd>call ClojureAddLibPortal()<cr>
 nnoremap <leader>ptap <cmd>call ClojureAddTapExpression()<cr>
 nnoremap <leader>pget <cmd>ConjureEval (do (require 'portal.api) (portal.api/selected))<cr>
 nnoremap <leader>rtap <cmd>call ClojureRemTapExpression()<cr>
