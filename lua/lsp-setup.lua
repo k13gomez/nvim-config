@@ -2,7 +2,18 @@
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
 local lsputil = require("lspconfig.util")-- If you want icons for diagnostic errors, you'll need to define them somewhere:
 
+local function merge(t1, t2)
+    local result = {}
+    for k, v in pairs(t1 or {}) do result[k] = v end
+    for k, v in pairs(t2 or {}) do result[k] = v end
+    return result
+end
+
 vim.diagnostic.config({
+  virtual_text = false,
+  underline = true,
+  update_in_insert = false,
+  severity_sort = true,
   signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = " ",
@@ -27,14 +38,12 @@ vim.diagnostic.config({
 
 -- Set up vim.lsp.config
 local handlers = {
-  ["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-    severity_sort = true,
-    update_in_insert = false,
-    underline = true,
-    virtual_text = false,
-  }),
-  ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" }),
-  ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" }),
+  ["textDocument/hover"] = function(args)
+    vim.lsp.handlers.hover(merge({ border = "single" }, args))
+  end,
+  ["textDocument/signatureHelp"] = function (args)
+    vim.lsp.handlers.signature_help(merge({ border = "single" }), args)
+  end
 }
 local function on_attach(client, bufnr)
   vim.bo[bufnr].formatexpr = "v:lua.vim.lsp.formatexpr(#{timeout_ms:1000})"
