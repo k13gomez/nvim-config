@@ -1,3 +1,8 @@
+" Load before plugins
+
+" polyglot
+let g:polyglot_disabled = ['csv']
+
 " Automatically install Vim-Pathogen if it is not yet installed
 if empty(glob('~/.config/nvim/autoload/pathogen.vim'))
     silent !curl -fLo ~/.config/nvim/autoload/pathogen.vim --create-dirs
@@ -99,9 +104,8 @@ Plug 'nvim-tree/nvim-web-devicons'
 Plug 'MunifTanjim/nui.nvim'
 Plug 'nvim-neo-tree/neo-tree.nvim'
 Plug 'sheerun/vim-polyglot'
-Plug 'gpanders/nvim-parinfer'
-" Plug 'eraserhd/parinfer-rust', {'do':
-"        \  'cargo build --release'}
+"Plug 'gpanders/nvim-parinfer'
+Plug 'eraserhd/parinfer-rust', {'do': 'cargo build --release'}
 Plug 'k13gomez/cmp-clojure-deps'
 Plug 'tpope/vim-commentary'
 Plug 'freitass/todo.txt-vim'
