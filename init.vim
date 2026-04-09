@@ -94,6 +94,7 @@ Plug 'nvim-tree/nvim-web-devicons'
 Plug 'MunifTanjim/nui.nvim'
 Plug 'nvim-neo-tree/neo-tree.nvim'
 Plug 'sheerun/vim-polyglot'
+Plug 'guns/vim-sexp'
 "Plug 'gpanders/nvim-parinfer'
 Plug 'eraserhd/parinfer-rust', {'do': 'cargo build --release'}
 Plug 'k13gomez/cmp-clojure-deps'
@@ -392,6 +393,16 @@ set statusline+=\ [%b][0x%B]\                            " ASCII and byte code u
 set statusline+=%0*\ %{toupper(g:currentmode[mode()])}\  " The current mode
 
 " END: status line configuration
+
+" sexp
+let g:sexp_mappings = {
+        \ 'sexp_put_before': '<LocalLeader>P',
+        \ 'sexp_put_after':  '<LocalLeader>p',
+        \ 'sexp_replace':    {'x': '<LocalLeader>p',
+        \                     'n': '<LocalLeader><LocalLeader>p'},
+        \ 'sexp_replace_P':  {'x': '<LocalLeader>P',
+        \                     'n': '<LocalLeader><LocalLeader>P'},
+    \ }
 
 " mustache
 let g:mustache_abbreviations = 1
