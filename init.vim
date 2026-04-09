@@ -71,7 +71,6 @@ Plug 'endaaman/vim-case-master'
 
 " copilot
 Plug 'github/copilot.vim'
-Plug 'CopilotC-Nvim/CopilotChat.nvim', {'do':'make tiktoken'}
 
 " lets go
 Plug 'fatih/vim-go'
@@ -85,21 +84,12 @@ Plug 'ckipp01/stylua-nvim', {'do': 'cargo install stylua'}
 " mix some elixir
 Plug 'elixir-tools/elixir-tools.nvim', { 'tag': 'stable' }
 
-" terraform setup, not ideal
-Plug 'deoplete-plugins/deoplete-lsp'
-Plug 'Shougo/deoplete.nvim'
-Plug 'hashivim/vim-terraform'
-Plug 'juliosueiras/vim-terraform-completion'
-
 " can't live without these too
 Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-dotenv'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'HiPhish/rainbow-delimiters.nvim'
-Plug 'guns/vim-sexp'
-Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'MunifTanjim/nui.nvim'
 Plug 'nvim-neo-tree/neo-tree.nvim'
@@ -107,8 +97,6 @@ Plug 'sheerun/vim-polyglot'
 "Plug 'gpanders/nvim-parinfer'
 Plug 'eraserhd/parinfer-rust', {'do': 'cargo build --release'}
 Plug 'k13gomez/cmp-clojure-deps'
-Plug 'tpope/vim-commentary'
-Plug 'freitass/todo.txt-vim'
 
 call plug#end()
 
@@ -433,7 +421,6 @@ let g:terraform_completion_keys = 1
 let g:terraform_registry_module_completion = 1
 
 " lua setup
-lua require('copilot-setup')
 lua require('neo-tree-setup')
 lua require('treesitter-setup')
 lua require('cmp-setup')

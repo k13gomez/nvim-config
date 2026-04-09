@@ -117,7 +117,7 @@ vim.lsp.config("*", {
   capabilities = capabilities,
 })
 
-local servers = { 'clojure_lsp', 'rust_analyzer', 'lua_ls' }
+local servers = { 'clojure_lsp', 'rust_analyzer', 'lua_ls', 'terraformls' }
 
 vim.lsp.enable(servers)
 
