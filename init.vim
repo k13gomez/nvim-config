@@ -47,6 +47,13 @@ set redrawtime=5000         " set maximum redrawtime for syntax highlight
 set directory=~/.cache/vim-swapfiles//   " Directory for swap files.
 set backupdir=~/.cache/vim-backupfiles// " Directory to store backup files.
 
+" color settings
+set termguicolors
+set background=dark
+colorscheme PaperColor
+set guifont=Monaco:h14
+highlight Pmenu ctermbg=Black guibg=Black
+
 " Call vim-plug to manage plugins
 call plug#begin('~/.config/nvim/bundle')
 
@@ -100,13 +107,6 @@ Plug 'eraserhd/parinfer-rust', {'do': 'cargo build --release'}
 Plug 'k13gomez/cmp-clojure-deps'
 
 call plug#end()
-
-" color settings
-set termguicolors
-set background=dark
-colorscheme PaperColor
-set guifont=Monaco:h14
-highlight Pmenu ctermbg=Black guibg=Black
 
 " BEGIN: Helpers
 " Utility functions
@@ -420,16 +420,9 @@ let g:clojure_special_indent_words =
 let g:clojure_align_subforms = 1
 let g:clojure_maxlines = 2000
 
-" terraform setup uses deoplete for better auto completion than what we get
-" from terraform-ls
-let g:deoplete#enable_at_startup = 0
+" terraform autoformat on save
 autocmd BufWritePre *.tfvars lua vim.lsp.buf.format()
 autocmd BufWritePre *.tf lua vim.lsp.buf.format()
-autocmd FileType terraform call deoplete#custom#buffer_option('auto_complete', v:true)
-" (Optional) Default: 0, enable(1)/disable(0) plugin's keymapping
-let g:terraform_completion_keys = 1
-" (Optional) Default: 1, enable(1)/disable(0) terraform module registry completion
-let g:terraform_registry_module_completion = 1
 
 " lua setup
 lua require('neo-tree-setup')
