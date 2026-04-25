@@ -1,12 +1,12 @@
 -- Set up nvim-cmp.
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
-local lsputil = require("lspconfig.util")-- If you want icons for diagnostic errors, you'll need to define them somewhere:
+local lsputil = require("lspconfig.util") -- If you want icons for diagnostic errors, you'll need to define them somewhere:
 
 local function merge(t1, t2)
-    local result = {}
-    for k, v in pairs(t1 or {}) do result[k] = v end
-    for k, v in pairs(t2 or {}) do result[k] = v end
-    return result
+  local result = {}
+  for k, v in pairs(t1 or {}) do result[k] = v end
+  for k, v in pairs(t2 or {}) do result[k] = v end
+  return result
 end
 
 vim.diagnostic.config({
@@ -41,10 +41,11 @@ local handlers = {
   ["textDocument/hover"] = function(args)
     vim.lsp.handlers.hover(merge({ border = "single" }, args))
   end,
-  ["textDocument/signatureHelp"] = function (args)
+  ["textDocument/signatureHelp"] = function(args)
     vim.lsp.handlers.signature_help(merge({ border = "single" }), args)
   end
 }
+
 local function on_attach(client, bufnr)
   vim.bo[bufnr].formatexpr = "v:lua.vim.lsp.formatexpr(#{timeout_ms:1000})"
   vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", { noremap = true })
@@ -109,7 +110,7 @@ local function on_attach(client, bufnr)
 end
 
 local capabilities =
-  vim.tbl_deep_extend("force", lsputil.default_config.capabilities, cmp_nvim_lsp.default_capabilities())
+    vim.tbl_deep_extend("force", lsputil.default_config.capabilities, cmp_nvim_lsp.default_capabilities())
 
 vim.lsp.config("*", {
   on_attach = on_attach,
@@ -120,6 +121,17 @@ vim.lsp.config("*", {
 local servers = { 'clojure_lsp', 'rust_analyzer', 'lua_ls', 'terraformls' }
 
 vim.lsp.enable(servers)
+
+vim.lsp.config('lua_ls', {
+  settings = {
+    Lua = {
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = { 'vim' },
+      },
+    },
+  },
+})
 
 local elixir = require("elixir")
 local elixirls = require("elixir.elixirls")

@@ -2,7 +2,6 @@
 local cmp = require("cmp")
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
 local cmp_clojure_deps = require("cmp-clojure-deps")
-local lsputil = require("lspconfig.util")
 
 -- setup sources
 cmp_nvim_lsp.setup({})
@@ -21,7 +20,7 @@ cmp.setup({
   formatting = {
     format = lspkind.cmp_format({
       mode = "symbol", -- show only symbol annotations
-      maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+      maxwidth = 50,   -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
       -- can also be a function to dynamically calculate max width such as
       -- maxwidth = function() return math.floor(0.45 * vim.o.columns) end,
       symbol_map = {
@@ -51,7 +50,7 @@ cmp.setup({
         Operator = "󰆕",
         TypeParameter = "",
       },
-      ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+      ellipsis_char = "...",    -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
       show_labelDetails = true, -- show labelDetails in menu. Disabled by default
 
       -- The function below will be called before any actual modifications from lspkind
@@ -94,10 +93,10 @@ cmp.setup({
   }),
   sources = cmp.config.sources({
     { name = "clojure-tools-deps", dup = 0 },
-    { name = "nvim_lsp", dup = 0 },
+    { name = "nvim_lsp",           dup = 0 },
     { name = "vsnip" },
-    { name = "path", option = path_options, dup = 0 },
-    { name = "conjure", dup = 0 },
+    { name = "path",               option = path_options, dup = 0 },
+    { name = "conjure",            dup = 0 },
   }, {
     { name = "buffer", dup = 0 },
   }),
@@ -129,5 +128,3 @@ cmp.setup.cmdline(":", {
     { name = "cmdline", dup = 0 },
   }),
 })
-
-
