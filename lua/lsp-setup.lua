@@ -132,31 +132,3 @@ vim.lsp.config('lua_ls', {
     },
   },
 })
-
-local elixir = require("elixir")
-local elixirls = require("elixir.elixirls")
-
-elixir.setup({
-  nextls = { enable = false },
-  elixirls = {
-    enable = true,
-    settings = elixirls.settings({
-      dialyzerEnabled = false,
-      enableTestLenses = true,
-      suggestSpecs = true,
-      fetchDeps = true,
-    }),
-    capabilities = capabilities,
-    handlers = handlers,
-    on_attach = function(client, bufnr)
-      on_attach(client, bufnr)
-      vim.api.nvim_buf_set_keymap(bufnr, "n", "efp", "<Cmd>ElixirFromPipe<CR>", { noremap = true })
-      vim.api.nvim_buf_set_keymap(bufnr, "n", "etp", "<Cmd>ElixirToPipe<CR>", { noremap = true })
-      vim.api.nvim_buf_set_keymap(bufnr, "v", "eem", "<Cmd>ElixirExpandMacro<CR>", { noremap = true })
-      vim.api.nvim_buf_set_keymap(bufnr, "n", "ert", "<Cmd>lua vim.lsp.codelens.run()<CR>", { noremap = true })
-    end,
-  },
-  projectionist = {
-    enable = false,
-  },
-})

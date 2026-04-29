@@ -82,14 +82,8 @@ Plug 'github/copilot.vim'
 " lets go
 Plug 'fatih/vim-go'
 
-" rust up
-Plug 'rust-lang/rust.vim'
-
 " lua support
 Plug 'ckipp01/stylua-nvim', {'do': 'cargo install stylua'}
-
-" mix some elixir
-Plug 'elixir-tools/elixir-tools.nvim', { 'tag': 'stable' }
 
 " can't live without these too
 Plug 'mhinz/vim-startify'
@@ -102,8 +96,8 @@ Plug 'MunifTanjim/nui.nvim'
 Plug 'nvim-neo-tree/neo-tree.nvim'
 Plug 'sheerun/vim-polyglot'
 Plug 'guns/vim-sexp'
-"Plug 'gpanders/nvim-parinfer'
-Plug 'eraserhd/parinfer-rust', {'do': 'cargo build --release'}
+Plug 'gpanders/nvim-parinfer'
+"Plug 'eraserhd/parinfer-rust', {'do': 'cargo build --release'}
 Plug 'k13gomez/cmp-clojure-deps'
 
 call plug#end()
@@ -311,7 +305,6 @@ nnoremap <leader>,test <cmd>ConjureEval (clojure.test/run-tests)<cr>
 nnoremap <leader>rns <cmd>ConjureEval (require (ns-name *ns*) :reload)<cr>
 nnoremap <leader>rst <cmd>ConjureEval (do (rules.core/reset-rules!) (rules.core/reset-loader!))<cr>
 nnoremap <leader>hto <cmd>ConjureEval (do (require '[pjstadig.humane-test-output]) (pjstadig.humane-test-output/activate!))<cr>
-nnoremap <leader>todo <cmd>tabedit ~/todo.txt<cr>
 
 " BEGIN: tabline configuration
 function! Tabline()
