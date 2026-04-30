@@ -14,12 +14,7 @@ function M.render()
     s = s .. (i == current and "%#TabLineSel#" or "%#TabLine#")
     s = s .. " " .. i .. ":"
     if bufname ~= "" then
-      s = s
-        .. "["
-        .. vim.fn.fnamemodify(bufname, ":h:t")
-        .. "/"
-        .. vim.fn.fnamemodify(bufname, ":t")
-        .. "] "
+      s = s .. "[" .. vim.fn.fnamemodify(bufname, ":h:t") .. "/" .. vim.fn.fnamemodify(bufname, ":t") .. "] "
     else
       s = s .. "[No Name] "
     end

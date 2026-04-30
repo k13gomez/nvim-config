@@ -95,12 +95,7 @@ map("n", "<leader>cw", clj.warn_on_reflection, { desc = "*warn-on-reflection* on
 map("n", "<leader>ufl", function()
   require("stylua-nvim").format_file()
 end, { desc = "Format Lua (stylua)" })
-map(
-  "n",
-  "<leader>crn",
-  "<cmd>ConjureEval (require (ns-name *ns*) :reload)<cr>",
-  { desc = "Reload current ns" }
-)
+map("n", "<leader>crn", "<cmd>ConjureEval (require (ns-name *ns*) :reload)<cr>", { desc = "Reload current ns" })
 map(
   "n",
   "<leader>crr",

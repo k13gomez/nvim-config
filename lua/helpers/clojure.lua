@@ -26,15 +26,11 @@ function M.add_lib_portal()
 end
 
 function M.add_tap_expression()
-  eval(
-    "(do (require 'portal.api) (portal.api/open) (add-tap #'portal.api/submit) (add-tap #'println))"
-  )
+  eval("(do (require 'portal.api) (portal.api/open) (add-tap #'portal.api/submit) (add-tap #'println))")
 end
 
 function M.remove_tap_expression()
-  eval(
-    "(do (require 'portal.api) (portal.api/open) (remove-tap #'portal.api/submit) (remove-tap #'println))"
-  )
+  eval("(do (require 'portal.api) (portal.api/open) (remove-tap #'portal.api/submit) (remove-tap #'println))")
 end
 
 function M.run_test()
