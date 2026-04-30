@@ -1,4 +1,10 @@
-require("nvim-treesitter").setup({
+local ok_ts, ts = pcall(require, "nvim-treesitter")
+local ok_rd, rainbow_delimiters = pcall(require, "rainbow-delimiters")
+if not (ok_ts and ok_rd) then
+  return
+end
+
+ts.setup({
   ensure_installed = { "c", "lua", "diff", "vim", "vimdoc", "query", "clojure" },
   sync_install = false,
   auto_install = true,
@@ -8,8 +14,6 @@ require("nvim-treesitter").setup({
     additional_vim_regex_highlighting = false,
   },
 })
-
-local rainbow_delimiters = require("rainbow-delimiters")
 
 vim.g.rainbow_delimiters = {
   strategy = {

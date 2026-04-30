@@ -9,6 +9,7 @@ require("helpers.text")
 require("helpers.clojure")
 
 require("config.keymaps")
+require("plugins.which-key")
 require("config.autocmds")
 
 require("ui.tabline")

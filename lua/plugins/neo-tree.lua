@@ -1,10 +1,11 @@
--- Unless you are still migrating, remove the deprecated commands from v1.x
 vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 
--- NOTE: this is changed from v1.x, which used the old style of highlight groups
--- in the form "LspDiagnosticsSignWarning"
+local ok, neo_tree = pcall(require, "neo-tree")
+if not ok then
+  return
+end
 
-require("neo-tree").setup({
+neo_tree.setup({
   close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
   popup_border_style = "rounded",
   enable_git_status = true,

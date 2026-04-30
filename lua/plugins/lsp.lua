@@ -1,5 +1,8 @@
-local cmp_nvim_lsp = require("cmp_nvim_lsp")
-local lsputil = require("lspconfig.util")
+local ok_cnl, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+local ok_util, lsputil = pcall(require, "lspconfig.util")
+if not (ok_cnl and ok_util) then
+  return
+end
 
 vim.diagnostic.config({
   virtual_text = false,
@@ -39,34 +42,36 @@ local handlers = {
 
 local function on_attach(_client, bufnr)
   vim.bo[bufnr].formatexpr = "v:lua.vim.lsp.formatexpr(#{timeout_ms:1000})"
-  local opts = { buffer = bufnr, noremap = true, silent = true }
-  vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-  vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-  vim.keymap.set("n", "<leader>ld", vim.lsp.buf.declaration, opts)
-  vim.keymap.set("n", "<leader>lt", vim.lsp.buf.type_definition, opts)
-  vim.keymap.set("n", "<leader>lh", vim.lsp.buf.signature_help, opts)
-  vim.keymap.set("n", "<leader>ln", vim.lsp.buf.rename, opts)
-  vim.keymap.set("n", "<leader>le", vim.diagnostic.open_float, opts)
-  vim.keymap.set("n", "<leader>lq", vim.diagnostic.setloclist, opts)
+  local function bopts(desc)
+    return { buffer = bufnr, noremap = true, silent = true, desc = desc }
+  end
+  vim.keymap.set("n", "gd", vim.lsp.buf.definition, bopts("Goto definition"))
+  vim.keymap.set("n", "K", vim.lsp.buf.hover, bopts("Hover"))
+  vim.keymap.set("n", "<leader>ld", vim.lsp.buf.declaration, bopts("Goto declaration"))
+  vim.keymap.set("n", "<leader>lt", vim.lsp.buf.type_definition, bopts("Goto type definition"))
+  vim.keymap.set("n", "<leader>lh", vim.lsp.buf.signature_help, bopts("Signature help"))
+  vim.keymap.set("n", "<leader>ln", vim.lsp.buf.rename, bopts("Rename symbol"))
+  vim.keymap.set("n", "<leader>le", vim.diagnostic.open_float, bopts("Show diagnostic"))
+  vim.keymap.set("n", "<leader>lq", vim.diagnostic.setloclist, bopts("Diagnostics → loclist"))
   vim.keymap.set({ "n", "v" }, "ff", function()
     vim.lsp.buf.format({ async = true })
-  end, opts)
+  end, bopts("Format buffer"))
   vim.keymap.set("n", "<leader>lj", function()
     vim.diagnostic.goto_next()
-  end, opts)
+  end, bopts("Next diagnostic"))
   vim.keymap.set("n", "<leader>lk", function()
     vim.diagnostic.goto_prev()
-  end, opts)
-  vim.keymap.set({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, opts)
+  end, bopts("Previous diagnostic"))
+  vim.keymap.set({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, bopts("Code action"))
   vim.keymap.set("n", "<leader>lw", function()
     require("telescope.builtin").diagnostics()
-  end, opts)
+  end, bopts("Workspace diagnostics"))
   vim.keymap.set("n", "<leader>lr", function()
     require("telescope.builtin").lsp_references()
-  end, opts)
+  end, bopts("References"))
   vim.keymap.set("n", "<leader>li", function()
     require("telescope.builtin").lsp_implementations()
-  end, opts)
+  end, bopts("Implementations"))
 end
 
 local capabilities =

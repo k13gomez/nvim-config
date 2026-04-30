@@ -49,6 +49,7 @@ vim.cmd([[
   Plug 'guns/vim-sexp'
   Plug 'gpanders/nvim-parinfer'
   Plug 'k13gomez/cmp-clojure-deps'
+  Plug 'folke/which-key.nvim'
 
   call plug#end()
 ]])

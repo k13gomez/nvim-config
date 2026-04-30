@@ -1,6 +1,11 @@
-local cmp = require("cmp")
-local cmp_nvim_lsp = require("cmp_nvim_lsp")
-local cmp_clojure_deps = require("cmp-clojure-deps")
+local ok_cmp, cmp = pcall(require, "cmp")
+local ok_cnl, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+local ok_ccd, cmp_clojure_deps = pcall(require, "cmp-clojure-deps")
+local ok_cmp_compare, compare = pcall(require, "cmp.config.compare")
+local ok_lspkind, lspkind = pcall(require, "lspkind")
+if not (ok_cmp and ok_cnl and ok_ccd and ok_cmp_compare and ok_lspkind) then
+  return
+end
 
 cmp_nvim_lsp.setup({})
 cmp_clojure_deps.setup({})
@@ -10,9 +15,6 @@ local path_options = {
     return vim.fn.getcwd()
   end,
 }
-
-local compare = require("cmp.config.compare")
-local lspkind = require("lspkind")
 
 cmp.setup({
   formatting = {
