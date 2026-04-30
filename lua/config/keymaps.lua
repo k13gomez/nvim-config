@@ -5,12 +5,12 @@ local clj = require("helpers.clojure")
 map("n", "<leader>sv", "<cmd>source $MYVIMRC<cr>", { desc = "Source vimrc" })
 map("n", "<leader>tab", "<cmd>tabnew<cr>", { desc = "New tab" })
 
-map("n", "<leader>md5", text.hash, { desc = "Insert random hex hash" })
-map("n", "<leader>uid", text.guid, { desc = "Insert UUID" })
-map("n", "<leader>eid", text.empty_guid, { desc = "Insert empty UUID" })
-map("n", "<leader>now", text.datetime_now, { desc = "Insert ISO timestamp" })
-map("n", "<leader>xml", text.pretty_xml, { desc = "Pretty-print XML" })
-map("n", "<leader>json", text.pretty_json, { desc = "Pretty-print JSON" })
+map("n", "<leader>uh", text.hash, { desc = "Insert random hex hash" })
+map("n", "<leader>uu", text.guid, { desc = "Insert UUID" })
+map("n", "<leader>ue", text.empty_guid, { desc = "Insert empty UUID" })
+map("n", "<leader>uts", text.datetime_now, { desc = "Insert ISO timestamp" })
+map("n", "<leader>ufx", text.pretty_xml, { desc = "Pretty-print XML" })
+map("n", "<leader>ufj", text.pretty_json, { desc = "Pretty-print JSON" })
 
 map("n", "<leader>tt", "<cmd>Neotree toggle position=right<cr>", { desc = "Toggle neo-tree" })
 map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find files" })
@@ -76,9 +76,9 @@ map("", "<ScrollWheelDown>", "j")
 map("", "<ScrollWheelUp>", "k")
 
 map("n", "<leader>cv", clj.find_library_versions, { desc = "Find library versions" })
-map("n", "<leader>tap", clj.tap_expression, { desc = "tap> word at cursor" })
 map("n", "<leader>cp", clj.add_lib_portal, { desc = "Portal: add lib" })
 map("n", "<leader>ct", clj.add_tap_expression, { desc = "Portal: taps on" })
+map("n", "<leader>cT", clj.tap_expression, { desc = "tap> word at cursor" })
 map("n", "<leader>cu", clj.remove_tap_expression, { desc = "Portal: taps off" })
 map(
   "n",
@@ -86,36 +86,24 @@ map(
   "<cmd>ConjureEval (do (require 'portal.api) (portal.api/selected))<cr>",
   { desc = "Portal: get selected" }
 )
-map("n", "<leader>tone", clj.run_test, { desc = "Run one Clojure test" })
-map("n", "<leader>tall", clj.run_tests, { desc = "Run all Clojure tests" })
-map("n", "<leader>efn", clj.eval_fn, { desc = "Eval fn at cursor" })
+map("n", "<leader>cro", clj.run_test, { desc = "Run one Clojure test" })
+map("n", "<leader>crt", clj.run_tests, { desc = "Run all Clojure tests" })
+map("n", "<leader>cef", clj.eval_fn, { desc = "Clojure Eval fn at cursor" })
 map("n", "<leader>cj", clj.get_pid, { desc = "JVM PID" })
-map("n", "<leader>wrf", clj.warn_on_reflection, { desc = "*warn-on-reflection* on" })
+map("n", "<leader>cw", clj.warn_on_reflection, { desc = "*warn-on-reflection* on" })
 
-map("n", "<leader>fl", function()
+map("n", "<leader>ufl", function()
   require("stylua-nvim").format_file()
 end, { desc = "Format Lua (stylua)" })
 map(
   "n",
-  "<leader>,test",
-  "<cmd>ConjureEval (clojure.test/run-tests)<cr>",
-  { desc = "Run tests in ns" }
-)
-map(
-  "n",
-  "<leader>rns",
+  "<leader>crn",
   "<cmd>ConjureEval (require (ns-name *ns*) :reload)<cr>",
   { desc = "Reload current ns" }
 )
 map(
   "n",
-  "<leader>rst",
+  "<leader>crr",
   "<cmd>ConjureEval (do (rules.core/reset-rules!) (rules.core/reset-loader!))<cr>",
-  { desc = "Reset rules" }
-)
-map(
-  "n",
-  "<leader>hto",
-  "<cmd>ConjureEval (do (require '[pjstadig.humane-test-output]) (pjstadig.humane-test-output/activate!))<cr>",
-  { desc = "Humane test output" }
+  { desc = "Reset clara rules" }
 )

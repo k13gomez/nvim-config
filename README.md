@@ -44,18 +44,18 @@ The popup at runtime is provided by [which-key.nvim](https://github.com/folke/wh
 | `<leader>tp` | n | Toggle paste mode |
 | `<leader>ti` | n | Toggle parinfer |
 | `<leader>gg` | n | GitGutter on |
-| `<leader>fl` | n | Format Lua (stylua) |
 
-## Insert helpers
+## Insert / utilities (`<leader>u…`)
 
 | Key | Action |
 |---|---|
-| `<leader>uid` | Insert UUID |
-| `<leader>eid` | Insert empty UUID |
-| `<leader>md5` | Insert random hex hash |
-| `<leader>now` | Insert ISO-8601 timestamp |
-| `<leader>xml` | Pretty-print XML buffer |
-| `<leader>json` | Pretty-print JSON buffer |
+| `<leader>uu` | Insert UUID |
+| `<leader>ue` | Insert empty UUID |
+| `<leader>uh` | Insert random hex hash |
+| `<leader>uts` | Insert ISO-8601 timestamp |
+| `<leader>ufx` | Pretty-print XML buffer |
+| `<leader>ufj` | Pretty-print JSON buffer |
+| `<leader>ufl` | Format Lua buffer (stylua) |
 
 ## Files & buffers
 
@@ -118,19 +118,17 @@ Bindings work in both normal and visual modes.
 | Key | Action |
 |---|---|
 | `<leader>repl` | Connect Conjure REPL (port-file) |
-| `<leader>tap` | `(tap> word-at-cursor)` |
+| `<leader>cv` | Find library versions for word at cursor |
 | `<leader>cp` | Portal: add lib |
 | `<leader>ct` / `<leader>cu` | Portal: taps on / off |
+| `<leader>cT` | `(tap> word-at-cursor)` |
 | `<leader>cg` | Portal: get selected |
-| `<leader>tone` / `<leader>tall` | Run one / all Clojure tests |
-| `<leader>efn` | Eval fn at cursor |
 | `<leader>cj` | JVM PID |
-| `<leader>wrf` | Enable `*warn-on-reflection*` |
-| `<leader>cv` | Find library versions for word at cursor |
-| `<leader>,test` | Run tests in current ns |
-| `<leader>rns` | Reload current ns |
-| `<leader>rst` | Reset clara rules cache |
-| `<leader>hto` | Activate humane-test-output |
+| `<leader>cef` | Eval fn at cursor |
+| `<leader>cw` | Enable `*warn-on-reflection*` |
+| `<leader>cro` / `<leader>crt` | Run one / all Clojure tests |
+| `<leader>crn` | Reload current ns |
+| `<leader>crr` | Reset clara rules cache |
 
 ## LSP (buffer-local on attach)
 
@@ -162,16 +160,54 @@ Bindings work in both normal and visual modes.
 
 ## vim-sexp (Clojure structural editing)
 
-`<localleader>` = `,` (same as `<leader>`). Custom overrides on top of vim-sexp's defaults:
+All `<LocalLeader>`-based defaults are remapped under `<leader>w…` so they share the popup with conjure's `<leader>w` group. Navigation / text objects / `<M-…>` swaps are unchanged.
+
+### Navigation
+
+| Key | Mode | Action |
+|---|---|---|
+| `(` / `)` | n, x, o | Move to prev / next bracket |
+| `[[` / `]]` | n, x, o | Move to prev / next top-level form |
+| `[e` / `]e` | n, x, o | Select prev / next element |
+| `af` / `if` | x, o | Outer / inner list text object |
+| `aF` / `iF` | x, o | Outer / inner top-level list |
+| `as` / `is` | x, o | Outer / inner string |
+| `ae` / `ie` | x, o | Outer / inner element |
+| `<M-h>` / `<M-l>` | n, x | Swap element backward / forward |
+| `<M-j>` / `<M-k>` | n, x | Swap list forward / backward |
+
+### Wrap list (`<leader>w` + bracket)
 
 | Key | Action |
 |---|---|
-| `<localleader>P` | `sexp_put_before` |
-| `<localleader>p` | `sexp_put_after` (n) / `sexp_replace` (x) |
-| `<localleader><localleader>p` | `sexp_replace` (n) |
-| `<localleader><localleader>P` | `sexp_replace_P` (n) |
+| `<leader>w(` / `<leader>w)` | Wrap list with `( … )` (head / tail) |
+| `<leader>w[` / `<leader>w]` | Wrap list with `[ … ]` |
+| `<leader>w{` / `<leader>w}` | Wrap list with `{ … }` |
 
-See [vim-sexp docs](https://github.com/guns/vim-sexp) for the full set of structural-edit bindings.
+### Wrap element (`<leader>we` + bracket)
+
+| Key | Action |
+|---|---|
+| `<leader>we(` / `<leader>we)` | Wrap element with `( … )` |
+| `<leader>we[` / `<leader>we]` | Wrap element with `[ … ]` |
+| `<leader>we{` / `<leader>we}` | Wrap element with `{ … }` |
+
+### Other structural ops
+
+| Key | Action |
+|---|---|
+| `<leader>wih` / `<leader>wit` | Insert at list head / tail |
+| `<leader>ws` | Splice list |
+| `<leader>wv` | Convolute |
+| `<leader>wcl` / `<leader>wce` | Clone list / element |
+| `<leader>wrl` / `<leader>wre` | Raise list / element |
+| `<leader>wph` / `<leader>wpt` | Put at list head / tail |
+| `<leader>wpb` / `<leader>wpa` | Put before / after (sexp-aware) |
+| `<leader>wxp` | Replace |
+| `<leader>wxx` | Replace (no-yank, via black-hole register) |
+| `<leader>wac` / `<leader>wat` | Align comments / align comments at top |
+
+See [vim-sexp docs](https://github.com/guns/vim-sexp) for what each op does.
 
 ## Mouse
 
