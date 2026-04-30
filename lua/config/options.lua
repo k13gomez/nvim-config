@@ -28,4 +28,4 @@ vim.cmd("filetype plugin indent on")
 vim.cmd("filetype plugin on")
 
 vim.g.mapleader = ","
-vim.g.maplocalleader = " "
+vim.g.maplocalleader = ","

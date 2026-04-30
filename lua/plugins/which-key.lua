@@ -11,7 +11,9 @@ wk.setup({
   },
   spec = {
     { "<leader>f", group = "find" },
-    { "<leader>l", group = "lsp" },
+    { "<leader>d", group = "lsp / diagnostics" },
+    { "<leader>c", group = "clojure / portal" },
+    { "<leader>t", group = "tabs / toggles" },
     { "<leader>>", group = "resize wider" },
     { "<leader><", group = "resize narrower" },
     { "<leader>,", group = "horiz resize / clojure tests" },

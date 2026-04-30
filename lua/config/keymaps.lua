@@ -18,10 +18,18 @@ map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Grep" })
 map("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "Buffers" })
 map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Help tags" })
 
-map("n", "<leader>ll", "<cmd>set number<cr>", { desc = "Show line numbers" })
-map("n", "<leader>nl", "<cmd>set nonumber<cr>", { desc = "Hide line numbers" })
-map("n", "<leader>pp", "<cmd>set paste<cr>", { desc = "Paste mode on" })
-map("n", "<leader>np", "<cmd>set nopaste<cr>", { desc = "Paste mode off" })
+map("n", "<leader>tn", function()
+  vim.opt.number = not vim.opt.number:get()
+end, { desc = "Toggle line numbers" })
+map("n", "<leader>tp", function()
+  vim.opt.paste = not vim.opt.paste:get()
+end, { desc = "Toggle paste mode" })
+
+local parinfer_on = false
+map("n", "<leader>ti", function()
+  parinfer_on = not parinfer_on
+  vim.cmd(parinfer_on and "ParinferOn" or "ParinferOff")
+end, { desc = "Toggle parinfer" })
 
 map("n", "<leader>>>", "<cmd>vertical resize +5<cr>", { desc = "Wider +5" })
 map("n", "<leader><<", "<cmd>vertical resize -5<cr>", { desc = "Narrower -5" })
@@ -37,8 +45,6 @@ map("n", "<leader>,>>>>", "<cmd>horizontal resize +20<cr>", { desc = "Taller +20
 map("n", "<leader>,<<<<", "<cmd>horizontal resize -20<cr>", { desc = "Shorter -20" })
 
 map("n", "<leader>repl", "<cmd>ConjureCljConnectPortFile<cr>", { desc = "Connect Conjure REPL" })
-map("n", "<leader>par", "<cmd>ParinferOn<cr>", { desc = "Parinfer on" })
-map("n", "<leader>nopar", "<cmd>ParinferOff<cr>", { desc = "Parinfer off" })
 map("n", "<leader>gg", "<cmd>GitGutterEnable<cr>", { desc = "GitGutter on" })
 map("n", "<leader>rt", "<cmd>retab<cr>", { desc = "Retab" })
 
@@ -69,24 +75,24 @@ map("n", "<leader>0", "<cmd>tablast<cr>", { desc = "Last tab" })
 map("", "<ScrollWheelDown>", "j")
 map("", "<ScrollWheelUp>", "k")
 
-map("n", "<leader>lib", clj.find_library_versions, { desc = "Find library versions" })
+map("n", "<leader>cv", clj.find_library_versions, { desc = "Find library versions" })
 map("n", "<leader>tap", clj.tap_expression, { desc = "tap> word at cursor" })
-map("n", "<leader>port", clj.add_lib_portal, { desc = "Add Portal lib" })
-map("n", "<leader>ptap", clj.add_tap_expression, { desc = "Portal: enable taps" })
+map("n", "<leader>cp", clj.add_lib_portal, { desc = "Portal: add lib" })
+map("n", "<leader>ct", clj.add_tap_expression, { desc = "Portal: taps on" })
+map("n", "<leader>cu", clj.remove_tap_expression, { desc = "Portal: taps off" })
 map(
   "n",
-  "<leader>pget",
+  "<leader>cg",
   "<cmd>ConjureEval (do (require 'portal.api) (portal.api/selected))<cr>",
   { desc = "Portal: get selected" }
 )
-map("n", "<leader>rtap", clj.remove_tap_expression, { desc = "Portal: disable taps" })
 map("n", "<leader>tone", clj.run_test, { desc = "Run one Clojure test" })
 map("n", "<leader>tall", clj.run_tests, { desc = "Run all Clojure tests" })
 map("n", "<leader>efn", clj.eval_fn, { desc = "Eval fn at cursor" })
-map("n", "<leader>pid", clj.get_pid, { desc = "JVM PID" })
+map("n", "<leader>cj", clj.get_pid, { desc = "JVM PID" })
 map("n", "<leader>wrf", clj.warn_on_reflection, { desc = "*warn-on-reflection* on" })
 
-map("n", "<leader>lua", function()
+map("n", "<leader>fl", function()
   require("stylua-nvim").format_file()
 end, { desc = "Format Lua (stylua)" })
 map(

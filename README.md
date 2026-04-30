@@ -29,9 +29,7 @@ On first launch, vim-plug bootstraps itself and runs `:PlugInstall` to fetch eve
 
 # Keybindings
 
-`<leader>` = `,`
-
-`<localleader>` = `<Space>`
+`<leader>` = `,` &nbsp;·&nbsp; `<localleader>` = `,` (same key)
 
 The popup at runtime is provided by [which-key.nvim](https://github.com/folke/which-key.nvim) — press a prefix and wait ~300ms.
 
@@ -42,10 +40,11 @@ The popup at runtime is provided by [which-key.nvim](https://github.com/folke/wh
 | `<leader>sv` | n | Source vimrc |
 | `<leader>tab` | n | New tab |
 | `<leader>rt` | n | Retab |
-| `<leader>ll` / `<leader>nl` | n | Show / hide line numbers |
-| `<leader>pp` / `<leader>np` | n | Paste mode on / off |
+| `<leader>tn` | n | Toggle line numbers |
+| `<leader>tp` | n | Toggle paste mode |
+| `<leader>ti` | n | Toggle parinfer |
 | `<leader>gg` | n | GitGutter on |
-| `<leader>lua` | n | Format Lua (stylua) |
+| `<leader>fl` | n | Format Lua (stylua) |
 
 ## Insert helpers
 
@@ -119,16 +118,15 @@ Bindings work in both normal and visual modes.
 | Key | Action |
 |---|---|
 | `<leader>repl` | Connect Conjure REPL (port-file) |
-| `<leader>par` / `<leader>nopar` | Parinfer on / off |
 | `<leader>tap` | `(tap> word-at-cursor)` |
-| `<leader>port` | Add Portal lib |
-| `<leader>ptap` / `<leader>rtap` | Portal: enable / disable taps |
-| `<leader>pget` | Portal: get selected |
+| `<leader>cp` | Portal: add lib |
+| `<leader>ct` / `<leader>cu` | Portal: taps on / off |
+| `<leader>cg` | Portal: get selected |
 | `<leader>tone` / `<leader>tall` | Run one / all Clojure tests |
 | `<leader>efn` | Eval fn at cursor |
-| `<leader>pid` | JVM PID |
+| `<leader>cj` | JVM PID |
 | `<leader>wrf` | Enable `*warn-on-reflection*` |
-| `<leader>lib` | Find library versions for word at cursor |
+| `<leader>cv` | Find library versions for word at cursor |
 | `<leader>,test` | Run tests in current ns |
 | `<leader>rns` | Reload current ns |
 | `<leader>rst` | Reset clara rules cache |
@@ -141,17 +139,17 @@ Bindings work in both normal and visual modes.
 | `gd` | n | Goto definition |
 | `K` | n | Hover |
 | `ff` | n, v | Format buffer |
-| `<leader>ld` | n | Goto declaration |
-| `<leader>lt` | n | Goto type definition |
-| `<leader>lh` | n | Signature help |
-| `<leader>ln` | n | Rename symbol |
-| `<leader>le` | n | Show diagnostic float |
-| `<leader>lq` | n | Diagnostics → loclist |
-| `<leader>lj` / `<leader>lk` | n | Next / previous diagnostic |
-| `<leader>la` | n, v | Code action |
-| `<leader>lw` | n | Telescope: workspace diagnostics |
-| `<leader>lr` | n | Telescope: references |
-| `<leader>li` | n | Telescope: implementations |
+| `<leader>dd` | n | Goto declaration |
+| `<leader>dt` | n | Goto type definition |
+| `<leader>ds` | n | Signature help |
+| `<leader>dn` | n | Rename symbol |
+| `<leader>de` | n | Show diagnostic float |
+| `<leader>dq` | n | Diagnostics → loclist |
+| `<leader>dj` / `<leader>dk` | n | Next / previous diagnostic |
+| `<leader>da` | n, v | Code action |
+| `<leader>dw` | n | Telescope: workspace diagnostics |
+| `<leader>dr` | n | Telescope: references |
+| `<leader>di` | n | Telescope: implementations |
 
 ## Completion (nvim-cmp, insert mode)
 
@@ -164,7 +162,7 @@ Bindings work in both normal and visual modes.
 
 ## vim-sexp (Clojure structural editing)
 
-Custom overrides on top of vim-sexp's defaults (`<localleader>` = `<Space>`):
+`<localleader>` = `,` (same as `<leader>`). Custom overrides on top of vim-sexp's defaults:
 
 | Key | Action |
 |---|---|
