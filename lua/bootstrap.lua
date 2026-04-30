@@ -47,7 +47,7 @@ vim.cmd([[
   Plug 'MunifTanjim/nui.nvim'
   Plug 'nvim-neo-tree/neo-tree.nvim'
   Plug 'guns/vim-sexp'
-  Plug 'gpanders/nvim-parinfer'
+  Plug 'eraserhd/parinfer-rust', {'do': 'cargo build --release'}
   Plug 'k13gomez/cmp-clojure-deps'
   Plug 'folke/which-key.nvim'
 
