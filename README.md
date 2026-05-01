@@ -215,3 +215,18 @@ See [vim-sexp docs](https://github.com/guns/vim-sexp) for what each op does.
 |---|---|
 | Scroll down | `j` |
 | Scroll up | `k` |
+
+## Folding
+
+Treesitter-based folding is enabled for any filetype whose parser ships a `folds.scm` query. Parsers auto-install on first open of a filetype — the buffer activates highlighting + folding + indent the moment the install finishes (see `lua/plugins/treesitter.lua`).
+
+All windows start with folds open (`foldenable = false`); use vim's native fold motions when you want them:
+
+| Key | Action |
+|---|---|
+| `za` | Toggle fold under cursor |
+| `zo` / `zc` | Open / close fold under cursor |
+| `zR` / `zM` | Open / close *all* folds |
+| `zr` / `zm` | Reduce / increase fold level by one |
+| `zj` / `zk` | Jump to next / previous fold |
+| `[z` / `]z` | Move to start / end of current fold |
