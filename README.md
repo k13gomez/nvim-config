@@ -43,7 +43,7 @@ The popup at runtime is provided by [which-key.nvim](https://github.com/folke/wh
 | `<leader>tn` | n | Toggle line numbers |
 | `<leader>tp` | n | Toggle paste mode |
 | `<leader>ti` | n | Toggle parinfer |
-| `<leader>gg` | n | GitGutter on |
+| `<leader>gg` / `<leader>gd` / `<leader>gt` | n | GitGutter on / off / toggle |
 
 ## Insert / utilities (`<leader>u…`)
 

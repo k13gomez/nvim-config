@@ -46,6 +46,8 @@ map("n", "<leader>,<<<<", "<cmd>horizontal resize -20<cr>", { desc = "Shorter -2
 
 map("n", "<leader>repl", "<cmd>ConjureCljConnectPortFile<cr>", { desc = "Connect Conjure REPL" })
 map("n", "<leader>gg", "<cmd>GitGutterEnable<cr>", { desc = "GitGutter on" })
+map("n", "<leader>gd", "<cmd>GitGutterDisable<cr>", { desc = "GitGutter off" })
+map("n", "<leader>gt", "<cmd>GitGutterToggle<cr>", { desc = "GitGutter toggle" })
 map("n", "<leader>rt", "<cmd>retab<cr>", { desc = "Retab" })
 
 map("n", "case", "<cmd>CaseMasterRotateCase<cr>", { silent = true, desc = "Rotate case" })
