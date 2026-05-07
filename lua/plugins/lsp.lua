@@ -93,4 +93,4 @@ vim.lsp.config("lua_ls", {
   },
 })
 
-vim.lsp.enable({ "clojure_lsp", "lua_ls", "terraformls" })
+vim.lsp.enable({ "clojure_lsp", "lua_ls" })
