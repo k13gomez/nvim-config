@@ -10,6 +10,7 @@ wk.setup({
     border = "single",
   },
   spec = {
+    { "<leader>b", group = "buffer" },
     { "<leader>f", group = "find" },
     { "<leader>d", group = "lsp / diagnostics" },
     { "<leader>c", group = "clojure / portal" },

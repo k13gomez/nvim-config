@@ -5,6 +5,13 @@ local clj = require("helpers.clojure")
 map("n", "<leader>sv", "<cmd>source $MYVIMRC<cr>", { desc = "Source vimrc" })
 map("n", "<leader>tab", "<cmd>tabnew<cr>", { desc = "New tab" })
 
+map("n", "<leader>bw", "<cmd>w<cr>", { desc = "Write buffer" })
+map("n", "<leader>bq", "<cmd>q<cr>", { desc = "Quit buffer" })
+map("n", "<leader>bW", "<cmd>wa<cr>", { desc = "Write all buffers" })
+map("n", "<leader>bQ", "<cmd>qa<cr>", { desc = "Quit all buffers" })
+map("n", "<leader>bx", "<cmd>wqa!<cr>", { desc = "Write all & quit all (force)" })
+map("n", "<leader>bX", "<cmd>qa!<cr>", { desc = "Quit all (force, discard)" })
+
 map("n", "<leader>uh", text.hash, { desc = "Insert random hex hash" })
 map("n", "<leader>uu", text.guid, { desc = "Insert UUID" })
 map("n", "<leader>ue", text.empty_guid, { desc = "Insert empty UUID" })
