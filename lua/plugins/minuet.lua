@@ -19,8 +19,8 @@ minuet.setup({
   throttle = 0,
   debounce = 100,
   provider = "openai_fim_compatible",
-  n_completions = 1,
-  context_window = 4096,
+  n_completions = 3,
+  context_window = 8192,
   context_ratio = 0.75,
   provider_options = {
     openai_fim_compatible = {
@@ -42,33 +42,35 @@ minuet.setup({
         suffix = false,
       },
       optional = {
-        stop = { "\n\n(", "```", "<|fim_prefix|>", "<|fim_suffix|>", "<|fim_middle|>" },
+        stop = { "\n\n", "```", "<|fim_prefix|>", "<|fim_suffix|>", "<|fim_middle|>" },
         stream = true,
         max_tokens = 1024,
-        temperature = 0,
+        temperature = 0.5,
+        top_p = 0.90
       },
     },
   },
   lsp = {
-    enabled_ft = { "*" },
     completion = {
       enable = false,
       adjust_indentation = false,
     },
     inline_completion = {
-      enable = true,
-      enabled_auto_trigger_ft = { "*" },
+      enable = false,
     },
   },
   virtualtext = {
-    auto_trigger_ft = {},
+    auto_trigger_ft = { "*" },
   },
 })
 
+-- Accept suggestion or insert Tab
 vim.keymap.set("i", "<Tab>", function()
-  if vim.lsp.inline_completion.get() then
+  if vt.action.is_visible() then
+    vt.action.accept()
     return ""
   end
+
   return "<Tab>"
 end, {
   expr = true,
@@ -76,12 +78,11 @@ end, {
   desc = "Minuet: Accept suggestion or insert tab",
 })
 
+-- Dismiss suggestion or exit insert mode
 vim.keymap.set("i", "<Esc>", function()
-  if vim.lsp.inline_completion.is_enabled() then
-    -- Native inline completion does not currently expose the same clean
-    -- "dismiss visible suggestion" action as minuet.virtualtext.
-    -- Exiting insert mode dismisses the inline ghost text.
-    return "<Esc>"
+  if vt.action.is_visible() then
+    vt.action.dismiss()
+    return ""
   end
 
   return "<Esc>"
@@ -89,4 +90,32 @@ end, {
   expr = true,
   replace_keycodes = true,
   desc = "Minuet: Dismiss suggestion or exit insert mode",
+})
+
+-- Previous suggestion or move cursor left
+vim.keymap.set("i", "<Left>", function()
+  if vt.action.is_visible() then
+    vt.action.prev()
+    return ""
+  end
+
+  return "<Left>"
+end, {
+  expr = true,
+  replace_keycodes = true,
+  desc = "Minuet: Cycle to previous suggestion or move cursor left",
+})
+
+-- Next suggestion or move cursor right
+vim.keymap.set("i", "<Right>", function()
+  if vt.action.is_visible() then
+    vt.action.next()
+    return ""
+  end
+
+  return "<Right>"
+end, {
+  expr = true,
+  replace_keycodes = true,
+  desc = "Minuet: Cycle to next suggestion or move cursor right",
 })
