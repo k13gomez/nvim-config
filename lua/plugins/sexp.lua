@@ -50,3 +50,5 @@ vim.g.sexp_mappings = {
   sexp_align_comments = "<Leader>wac",
   sexp_align_comments_top = "<Leader>wat",
 }
+
+vim.g.sexp_enable_insert_mode_mappings = 0

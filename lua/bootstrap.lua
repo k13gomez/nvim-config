@@ -35,6 +35,7 @@ vim.cmd([[
   Plug 'endaaman/vim-case-master'
 
   Plug 'github/copilot.vim'
+  Plug 'milanglacier/minuet-ai.nvim'
   Plug 'fatih/vim-go'
   Plug 'ckipp01/stylua-nvim', {'do': 'cargo install stylua'}
 
