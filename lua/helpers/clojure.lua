@@ -46,7 +46,7 @@ function M.eval_fn()
 end
 
 function M.warn_on_reflection()
-  eval("(set! *warn-on-reflection* true)")
+  eval("(alter-var-root #'*warn-on-reflection* (constantly true))")
 end
 
 function M.get_pid()
