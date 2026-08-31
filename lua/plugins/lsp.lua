@@ -93,4 +93,14 @@ vim.lsp.config("lua_ls", {
   },
 })
 
-vim.lsp.enable({ "clojure_lsp", "lua_ls" })
+vim.lsp.config("elixirls", {
+  settings = {
+    elixirLS = {
+      dialyzerEnabled = true,
+      fetchDeps = false,
+      enableTestLenses = false,
+    },
+  },
+})
+
+vim.lsp.enable({ "clojure_lsp", "lua_ls", "elixirls" })

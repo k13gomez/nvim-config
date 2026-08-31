@@ -1,6 +1,7 @@
 local map = vim.keymap.set
 local text = require("helpers.text")
 local clj = require("helpers.clojure")
+local ex = require("helpers.elixir")
 
 map("n", "<leader>sv", "<cmd>source $MYVIMRC<cr>", { desc = "Source vimrc" })
 map("n", "<leader>tab", "<cmd>tabnew<cr>", { desc = "New tab" })
@@ -100,6 +101,13 @@ map("n", "<leader>crt", clj.run_tests, { desc = "Run all Clojure tests" })
 map("n", "<leader>cef", clj.eval_fn, { desc = "Clojure Eval fn at cursor" })
 map("n", "<leader>cj", clj.get_pid, { desc = "JVM PID" })
 map("n", "<leader>cw", clj.warn_on_reflection, { desc = "*warn-on-reflection* on" })
+
+map("n", "<leader>mt", ex.test_at_cursor, { desc = "Mix: test at cursor" })
+map("n", "<leader>mf", ex.test_file, { desc = "Mix: test current file" })
+map("n", "<leader>ma", ex.test_all, { desc = "Mix: test all" })
+map("n", "<leader>mr", ex.test_failed, { desc = "Mix: re-run failed tests" })
+map("n", "<leader>mc", ex.compile, { desc = "Mix: compile" })
+map("n", "<leader>md", ex.deps_get, { desc = "Mix: deps.get" })
 
 map("n", "<leader>ufl", function()
   require("stylua-nvim").format_file()

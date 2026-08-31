@@ -7,6 +7,7 @@ require("config.colors")
 
 require("helpers.text")
 require("helpers.clojure")
+require("helpers.elixir")
 
 require("config.keymaps")
 require("plugins.which-key")
