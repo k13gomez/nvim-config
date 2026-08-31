@@ -40,7 +40,7 @@ local handlers = {
   end,
 }
 
-local function on_attach(_client, bufnr)
+local function on_attach(client, bufnr)
   vim.bo[bufnr].formatexpr = "v:lua.vim.lsp.formatexpr(#{timeout_ms:1000})"
   local function bopts(desc)
     return { buffer = bufnr, noremap = true, silent = true, desc = desc }
@@ -72,6 +72,13 @@ local function on_attach(_client, bufnr)
   vim.keymap.set("n", "<leader>di", function()
     require("telescope.builtin").lsp_implementations()
   end, bopts("Implementations"))
+  vim.keymap.set("n", "<leader>dl", vim.lsp.codelens.run, bopts("Run code lens"))
+
+  -- Only elixir-ls is set up with a client-side lens command below, so keep
+  -- lens rendering off for the other servers.
+  if client.name == "elixirls" then
+    vim.lsp.codelens.enable(true, { bufnr = bufnr })
+  end
 end
 
 local capabilities =
@@ -93,12 +100,17 @@ vim.lsp.config("lua_ls", {
   },
 })
 
+-- "Run test" / "Run tests" / "Run tests in module" lenses. elixir-ls only
+-- publishes the command; running it is the client's job, so register a handler
+-- (see helpers.elixir.run_test_lens). Trigger with <leader>dl or grx.
+vim.lsp.commands["elixir.lens.test.run"] = require("helpers.elixir").run_test_lens
+
 vim.lsp.config("elixirls", {
   settings = {
     elixirLS = {
       dialyzerEnabled = true,
-      fetchDeps = false,
-      enableTestLenses = false,
+      fetchDeps = true,
+      enableTestLenses = true,
     },
   },
 })
