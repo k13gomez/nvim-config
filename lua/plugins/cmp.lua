@@ -70,7 +70,9 @@ cmp.setup({
     },
   },
   snippet = {
-    expand = function(_) end,
+    expand = function(args)
+      vim.snippet.expand(args.body)
+    end,
   },
   window = {},
   mapping = cmp.mapping.preset.insert({
