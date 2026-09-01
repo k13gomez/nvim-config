@@ -35,3 +35,16 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     vim.lsp.buf.format({ timeout_ms = 3000 })
   end,
 })
+
+-- `mix test` output (helpers/elixir.lua) lands in a terminal split that goes
+-- read-only once the job exits. Give finished terminals a plain `q` to dismiss.
+vim.api.nvim_create_autocmd("TermClose", {
+  group = group,
+  callback = function(args)
+    vim.keymap.set("n", "q", "<cmd>bdelete!<cr>", {
+      buffer = args.buf,
+      nowait = true,
+      desc = "Close finished terminal",
+    })
+  end,
+})
