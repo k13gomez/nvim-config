@@ -17,6 +17,7 @@ require("ui.tabline")
 require("ui.statusline")
 
 require("plugins.conjure")
+require("plugins.clara-explorer")
 require("plugins.neo-tree")
 require("plugins.telescope")
 require("plugins.treesitter")

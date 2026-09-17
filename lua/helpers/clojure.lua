@@ -25,6 +25,10 @@ function M.add_lib_portal()
   eval("(do (require 'clojure.repl.deps) (clojure.repl.deps/add-lib 'djblue/portal))")
 end
 
+function M.analyze_ruleset()
+  eval("(do (require 'gateless-rules-explorer.flows.ruleset) (gateless-rules-explorer.flows.ruleset/analyze-ruleset! {:server true}))")
+end
+
 function M.add_tap_expression()
   eval("(do (require 'portal.api) (portal.api/open) (add-tap #'portal.api/submit) (add-tap #'println))")
 end

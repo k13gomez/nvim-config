@@ -14,7 +14,7 @@ wk.setup({
     { "<leader>f", group = "find" },
     { "<leader>d", group = "lsp / diagnostics" },
     { "<leader>c", group = "clojure / portal" },
-    { "<leader>cr", group = "clojure: run / reload / reset" },
+    { "<leader>cr", group = "clojure: run / reload / rules" },
     { "<leader>m", group = "elixir / mix" },
     { "<leader>t", group = "tabs / toggles" },
     { "<leader>u", group = "insert / utilities" },
