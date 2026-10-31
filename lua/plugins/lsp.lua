@@ -1,6 +1,5 @@
 local ok_cnl, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-local ok_util, lsputil = pcall(require, "lspconfig.util")
-if not (ok_cnl and ok_util) then
+if not ok_cnl then
   return
 end
 
@@ -23,10 +22,10 @@ vim.diagnostic.config({
       [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
     },
     texthl = {
-      [vim.diagnostic.severity.ERROR] = "LspDiagnosticSignError",
-      [vim.diagnostic.severity.WARN] = "LspDiagnosticSignWarn",
-      [vim.diagnostic.severity.INFO] = "LspDiagnosticSignInfo",
-      [vim.diagnostic.severity.HINT] = "LspDiagnosticSignHint",
+      [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+      [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+      [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+      [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
     },
   },
 })
@@ -69,22 +68,23 @@ local function on_attach(client, bufnr)
   end
 end
 
-local capabilities =
-  vim.tbl_deep_extend("force", lsputil.default_config.capabilities, cmp_nvim_lsp.default_capabilities())
-
 vim.lsp.config("*", {
   on_attach = on_attach,
-  capabilities = capabilities,
+  capabilities = cmp_nvim_lsp.default_capabilities(),
 })
 
+-- Teach lua_ls the Neovim runtime, but only inside this config so other Lua projects keep their own settings.
 vim.lsp.config("lua_ls", {
-  settings = {
-    Lua = {
-      diagnostics = {
-        globals = { "vim" },
-      },
-    },
-  },
+  on_init = function(client)
+    local root = client.workspace_folders and client.workspace_folders[1]
+    if not (root and vim.fs.normalize(root.name) == vim.fn.stdpath("config")) then
+      return
+    end
+    client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua or {}, {
+      runtime = { version = "LuaJIT" },
+      workspace = { checkThirdParty = false, library = { vim.env.VIMRUNTIME } },
+    })
+  end,
 })
 
 -- "Run test" / "Run tests" / "Run tests in module" lenses. elixir-ls only

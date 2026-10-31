@@ -37,11 +37,9 @@ The popup at runtime is provided by [which-key.nvim](https://github.com/folke/wh
 
 | Key | Mode | Action |
 |---|---|---|
-| `<leader>sv` | n | Source vimrc |
 | `<leader>tab` | n | New tab |
 | `<leader>rt` | n | Retab |
 | `<leader>tl` | n | Toggle line numbers |
-| `<leader>tp` | n | Toggle paste mode |
 | `<leader>ti` | n | Toggle parinfer |
 
 ## Insert / utilities (`<leader>u…`)
@@ -83,6 +81,7 @@ The popup at runtime is provided by [which-key.nvim](https://github.com/folke/wh
 | `<leader>fg` | Telescope: live grep |
 | `<leader>fb` | Telescope: buffers |
 | `<leader>fh` | Telescope: help tags |
+| `<leader>fs` | Telescope: switch the material style for this session |
 
 ## Tabs
 

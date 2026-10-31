@@ -38,13 +38,12 @@ vim.pack.add({
   gh("endaaman/vim-case-master"),
 
   gh("github/copilot.vim"),
-  gh("fatih/vim-go"),
   gh("stevearc/conform.nvim"),
 
   gh("mhinz/vim-startify"),
   gh("tpope/vim-fugitive"),
   gh("lewis6991/gitsigns.nvim"),
-  gh("NLKNguyen/papercolor-theme"),
+  gh("marko-cerovac/material.nvim"),
   gh("HiPhish/rainbow-delimiters.nvim"),
   gh("nvim-tree/nvim-web-devicons"),
   gh("MunifTanjim/nui.nvim"),

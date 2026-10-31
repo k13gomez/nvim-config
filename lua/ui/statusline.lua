@@ -40,17 +40,23 @@ vim.opt.statusline = table.concat({
   "%0* %{toupper(g:currentmode[mode()])} ",
 })
 
+local colors = require("material.colors")
+
+local function statusline_bg(bg)
+  vim.api.nvim_set_hl(0, "StatusLine", { fg = colors.editor.bg, bg = bg })
+end
+
 local group = vim.api.nvim_create_augroup("StatuslineColors", { clear = true })
 vim.api.nvim_create_autocmd("InsertEnter", {
   group = group,
   callback = function()
-    vim.cmd("hi statusline guifg=black guibg=#d7afff ctermfg=black ctermbg=magenta")
+    statusline_bg(colors.main.purple)
   end,
 })
 vim.api.nvim_create_autocmd("InsertLeave", {
   group = group,
   callback = function()
-    vim.cmd("hi statusline guifg=black guibg=#8fbfdc ctermfg=black ctermbg=cyan")
+    statusline_bg(colors.main.blue)
   end,
 })
-vim.cmd("hi statusline guifg=black guibg=#8fbfdc ctermfg=gray ctermbg=cyan")
+statusline_bg(colors.main.blue)

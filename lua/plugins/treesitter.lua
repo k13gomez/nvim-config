@@ -21,8 +21,10 @@ local function activate(buf, lang)
   end
 
   if vim.treesitter.query.get(lang, "folds") then
-    vim.opt_local.foldmethod = "expr"
-    vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+    for _, win in ipairs(vim.fn.win_findbuf(buf)) do
+      vim.wo[win][0].foldmethod = "expr"
+      vim.wo[win][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
+    end
   end
 end
 

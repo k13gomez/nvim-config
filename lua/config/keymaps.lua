@@ -3,7 +3,6 @@ local text = require("helpers.text")
 local clj = require("helpers.clojure")
 local ex = require("helpers.elixir")
 
-map("n", "<leader>sv", "<cmd>source $MYVIMRC<cr>", { desc = "Source vimrc" })
 map("n", "<leader>tab", "<cmd>tabnew<cr>", { desc = "New tab" })
 
 map("n", "<leader>bw", "<cmd>w<cr>", { desc = "Write buffer" })
@@ -20,18 +19,18 @@ map("n", "<leader>uts", text.datetime_now, { desc = "Insert ISO timestamp" })
 map("n", "<leader>ufx", text.pretty_xml, { desc = "Pretty-print XML" })
 map("n", "<leader>ufj", text.pretty_json, { desc = "Pretty-print JSON" })
 
-map("n", "<leader>tt", "<cmd>Neotree toggle position=right<cr>", { desc = "Toggle neo-tree" })
+map("n", "<leader>tt", "<cmd>Neotree toggle<cr>", { desc = "Toggle neo-tree" })
 map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find files" })
 map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Grep" })
 map("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "Buffers" })
 map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Help tags" })
+map("n", "<leader>fs", function()
+  require("material.functions").find_style()
+end, { desc = "Find material style" })
 
 map("n", "<leader>tl", function()
   vim.opt.number = not vim.opt.number:get()
 end, { desc = "Toggle line numbers" })
-map("n", "<leader>tp", function()
-  vim.opt.paste = not vim.opt.paste:get()
-end, { desc = "Toggle paste mode" })
 
 local parinfer_on = false
 map("n", "<leader>ti", function()
