@@ -176,56 +176,16 @@ Bindings work in both normal and visual modes.
 | `<C-e>` | Abort |
 | `<CR>` | Confirm currently selected item |
 
-## vim-sexp (Clojure structural editing)
+## S-expression navigation (lisp filetypes)
 
-All `<LocalLeader>`-based defaults are remapped under `<leader>w…` so they share the popup with conjure's `<leader>w` group. Navigation / text objects / `<M-…>` swaps are unchanged.
-
-### Navigation
+`lua/plugins/sexp.lua` maps `(` and `)` in Clojure, Fennel, Scheme and Lisp buffers.
+Brackets in strings, regexes, comments and char literals do not count.
+Parinfer does the structural editing.
 
 | Key | Mode | Action |
 |---|---|---|
-| `(` / `)` | n, x, o | Move to prev / next bracket |
-| `[[` / `]]` | n, x, o | Move to prev / next top-level form |
-| `[e` / `]e` | n, x, o | Select prev / next element |
-| `af` / `if` | x, o | Outer / inner list text object |
-| `aF` / `iF` | x, o | Outer / inner top-level list |
-| `as` / `is` | x, o | Outer / inner string |
-| `ae` / `ie` | x, o | Outer / inner element |
-| `<M-h>` / `<M-l>` | n, x | Swap element backward / forward |
-| `<M-j>` / `<M-k>` | n, x | Swap list forward / backward |
-
-### Wrap list (`<leader>w` + bracket)
-
-| Key | Action |
-|---|---|
-| `<leader>w(` / `<leader>w)` | Wrap list with `( … )` (head / tail) |
-| `<leader>w[` / `<leader>w]` | Wrap list with `[ … ]` |
-| `<leader>w{` / `<leader>w}` | Wrap list with `{ … }` |
-
-### Wrap element (`<leader>we` + bracket)
-
-| Key | Action |
-|---|---|
-| `<leader>we(` / `<leader>we)` | Wrap element with `( … )` |
-| `<leader>we[` / `<leader>we]` | Wrap element with `[ … ]` |
-| `<leader>we{` / `<leader>we}` | Wrap element with `{ … }` |
-
-### Other structural ops
-
-| Key | Action |
-|---|---|
-| `<leader>wih` / `<leader>wit` | Insert at list head / tail |
-| `<leader>ws` | Splice list |
-| `<leader>wv` | Convolute |
-| `<leader>wcl` / `<leader>wce` | Clone list / element |
-| `<leader>wrl` / `<leader>wre` | Raise list / element |
-| `<leader>wph` / `<leader>wpt` | Put at list head / tail |
-| `<leader>wpb` / `<leader>wpa` | Put before / after (sexp-aware) |
-| `<leader>wxp` | Replace |
-| `<leader>wxx` | Replace (no-yank, via black-hole register) |
-| `<leader>wac` / `<leader>wat` | Align comments / align comments at top |
-
-See [vim-sexp docs](https://github.com/guns/vim-sexp) for what each op does.
+| `(` | n, x, o | Move to the open bracket of the enclosing list (`backward-up-list`) |
+| `)` | n, x, o | Move to the close bracket of the enclosing list (`up-list`) |
 
 ## Mouse
 

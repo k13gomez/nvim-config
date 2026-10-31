@@ -113,10 +113,6 @@
       "rev": "0153fe03a919add2d6cf2d41b2d5b6e1188bc0e0",
       "src": "https://github.com/mustache/vim-mustache-handlebars"
     },
-    "vim-sexp": {
-      "rev": "b2ff4532c5913f539fe96fd8425e0e150ab21997",
-      "src": "https://github.com/guns/vim-sexp"
-    },
     "vim-startify": {
       "rev": "4e089dffdad46f3f5593f34362d530e8fe823dcf",
       "src": "https://github.com/mhinz/vim-startify"

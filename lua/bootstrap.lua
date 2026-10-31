@@ -49,7 +49,6 @@ vim.pack.add({
   gh("nvim-tree/nvim-web-devicons"),
   gh("MunifTanjim/nui.nvim"),
   gh("nvim-neo-tree/neo-tree.nvim"),
-  gh("guns/vim-sexp"),
   gh("eraserhd/parinfer-rust"),
   gh("k13gomez/cmp-clojure-deps"),
   gh("folke/which-key.nvim"),

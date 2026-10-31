@@ -1,52 +1,41 @@
--- vim-sexp's <LocalLeader>-based ops are remapped under <Leader>w… so they
--- don't shadow conjure's prefixes (which-key shows them all under "conjure:
--- wrap / s-exp"). Bracket-shaped wraps use the bracket itself; everything
--- else is a 2- or 3-char mnemonic. Default sexp_replace/sexp_put_* values
--- shadow plain p / P / gp / gP — clearing them here also keeps regular paste.
-vim.g.sexp_mappings = {
-  -- Wrap list (`(` `)` for round, `[` `]` for square, `{` `}` for curly)
-  sexp_round_head_wrap_list = "<Leader>w(",
-  sexp_round_tail_wrap_list = "<Leader>w)",
-  sexp_square_head_wrap_list = "<Leader>w[",
-  sexp_square_tail_wrap_list = "<Leader>w]",
-  sexp_curly_head_wrap_list = "<Leader>w{",
-  sexp_curly_tail_wrap_list = "<Leader>w}",
+-- `(` / `)` move to the enclosing open / close bracket, like Emacs
+-- backward-up-list / up-list. Built-in `[(` / `])` know one bracket type and
+-- do not skip strings, so this uses searchpair() over all three.
 
-  -- Wrap element (same brackets, prefixed with `e`)
-  sexp_round_head_wrap_element = "<Leader>we(",
-  sexp_round_tail_wrap_element = "<Leader>we)",
-  sexp_square_head_wrap_element = "<Leader>we[",
-  sexp_square_tail_wrap_element = "<Leader>we]",
-  sexp_curly_head_wrap_element = "<Leader>we{",
-  sexp_curly_tail_wrap_element = "<Leader>we}",
+-- Skip brackets inside strings, regexes, comments and char literals such as `\(`.
+-- This reads node types, not highlight captures, so it needs only the parser.
+-- The names cover the Clojure (str_lit, char_lit), Fennel and Scheme grammars.
+local function skip()
+  local pos = vim.api.nvim_win_get_cursor(0)
+  local ok, node = pcall(vim.treesitter.get_node, { pos = { pos[1] - 1, pos[2] }, ignore_injections = true })
+  if not ok or not node then
+    return false
+  end
+  local t = node:type()
+  return t:find("str") or t:find("char") or t:find("regex") or t:find("comment") or false
+end
 
-  -- Insert at list head / tail
-  sexp_insert_at_list_head = "<Leader>wih",
-  sexp_insert_at_list_tail = "<Leader>wit",
+local function up(flags)
+  return function()
+    pcall(function()
+      vim.treesitter.get_parser():parse()
+    end)
+    for i = 1, vim.v.count1 do
+      -- `s` sets the ' mark only on the first jump, so `''` returns to the start.
+      local f = i == 1 and flags .. "s" or flags
+      if vim.fn.searchpair("[([{]", "", "[)\\]}]", f, skip) <= 0 then
+        return
+      end
+    end
+  end
+end
 
-  -- Splice / convolute
-  sexp_splice_list = "<Leader>ws",
-  sexp_convolute = "<Leader>wv",
-
-  -- Clone list / element
-  sexp_clone_list = "<Leader>wcl",
-  sexp_clone_element = "<Leader>wce",
-
-  -- Raise list / element
-  sexp_raise_list = "<Leader>wrl",
-  sexp_raise_element = "<Leader>wre",
-
-  -- Put at head / tail / before / after
-  sexp_put_at_head = "<Leader>wph",
-  sexp_put_at_tail = "<Leader>wpt",
-  sexp_put_before = "<Leader>wpb",
-  sexp_put_after = "<Leader>wpa",
-
-  -- Replace (xp) / replace via black-hole register (xx)
-  sexp_replace = "<Leader>wxp",
-  sexp_replace_P = "<Leader>wxx",
-
-  -- Align comments
-  sexp_align_comments = "<Leader>wac",
-  sexp_align_comments_top = "<Leader>wat",
-}
+vim.api.nvim_create_autocmd("FileType", {
+  group = vim.api.nvim_create_augroup("SexpNav", { clear = true }),
+  pattern = { "clojure", "fennel", "scheme", "lisp" },
+  callback = function(args)
+    local opts = { buffer = args.buf }
+    vim.keymap.set({ "n", "x", "o" }, "(", up("bW"), vim.tbl_extend("force", opts, { desc = "Backward up list" }))
+    vim.keymap.set({ "n", "x", "o" }, ")", up("W"), vim.tbl_extend("force", opts, { desc = "Up list" }))
+  end,
+})
