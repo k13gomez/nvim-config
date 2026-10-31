@@ -26,7 +26,7 @@ map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Grep" })
 map("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "Buffers" })
 map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Help tags" })
 
-map("n", "<leader>tn", function()
+map("n", "<leader>tl", function()
   vim.opt.number = not vim.opt.number:get()
 end, { desc = "Toggle line numbers" })
 map("n", "<leader>tp", function()
@@ -53,9 +53,6 @@ map("n", "<leader>,>>>>", "<cmd>horizontal resize +20<cr>", { desc = "Taller +20
 map("n", "<leader>,<<<<", "<cmd>horizontal resize -20<cr>", { desc = "Shorter -20" })
 
 map("n", "<leader>repl", "<cmd>ConjureCljConnectPortFile<cr>", { desc = "Connect Conjure REPL" })
-map("n", "<leader>gg", "<cmd>GitGutterEnable<cr>", { desc = "GitGutter on" })
-map("n", "<leader>gd", "<cmd>GitGutterDisable<cr>", { desc = "GitGutter off" })
-map("n", "<leader>gt", "<cmd>GitGutterToggle<cr>", { desc = "GitGutter toggle" })
 map("n", "<leader>rt", "<cmd>retab<cr>", { desc = "Retab" })
 
 map("n", "case", "<cmd>CaseMasterRotateCase<cr>", { silent = true, desc = "Rotate case" })
@@ -109,9 +106,34 @@ map("n", "<leader>mr", ex.test_failed, { desc = "Mix: re-run failed tests" })
 map("n", "<leader>mc", ex.compile, { desc = "Mix: compile" })
 map("n", "<leader>md", ex.deps_get, { desc = "Mix: deps.get" })
 
-map("n", "<leader>ufl", function()
-  require("stylua-nvim").format_file()
-end, { desc = "Format Lua (stylua)" })
+map({ "n", "v" }, "<leader>df", function()
+  require("conform").format({ async = true, lsp_format = "fallback" })
+end, { desc = "Format buffer" })
+
+map("n", "<leader>pu", function()
+  vim.pack.update()
+end, { desc = "Update plugins (:w to confirm)" })
+map("n", "<leader>pl", function()
+  vim.pack.update(nil, { offline = true })
+end, { desc = "List plugins" })
+map("n", "<leader>pc", function()
+  local names = vim
+    .iter(vim.pack.get())
+    :filter(function(p)
+      return not p.active
+    end)
+    :map(function(p)
+      return p.spec.name
+    end)
+    :totable()
+  if #names == 0 then
+    vim.notify("No unused plugins")
+    return
+  end
+  vim.pack.del(names)
+  vim.notify("Deleted: " .. table.concat(names, ", "))
+end, { desc = "Delete unused plugins" })
+
 map("n", "<leader>crn", "<cmd>ConjureEval (require (ns-name *ns*) :reload)<cr>", { desc = "Reload current ns" })
 map(
   "n",

@@ -1,5 +1,3 @@
-vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
-
 local ok, neo_tree = pcall(require, "neo-tree")
 if not ok then
   return
@@ -41,7 +39,7 @@ neo_tree.setup({
     icon = {
       folder_closed = "",
       folder_open = "",
-      folder_empty = "ﰊ",
+      folder_empty = "󰜌",
       -- The next two settings are only a fallback, if you use nvim-web-devicons and configure default icons there
       -- then these will never be used.
       default = "*",

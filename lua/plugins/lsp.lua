@@ -31,15 +31,6 @@ vim.diagnostic.config({
   },
 })
 
-local handlers = {
-  ["textDocument/hover"] = function(args)
-    vim.lsp.handlers.hover(vim.tbl_extend("force", { border = "single" }, args or {}))
-  end,
-  ["textDocument/signatureHelp"] = function(args)
-    vim.lsp.handlers.signature_help(vim.tbl_extend("force", { border = "single" }, args or {}))
-  end,
-}
-
 local function on_attach(client, bufnr)
   vim.bo[bufnr].formatexpr = "v:lua.vim.lsp.formatexpr(#{timeout_ms:1000})"
   local function bopts(desc)
@@ -53,14 +44,11 @@ local function on_attach(client, bufnr)
   vim.keymap.set("n", "<leader>dn", vim.lsp.buf.rename, bopts("Rename symbol"))
   vim.keymap.set("n", "<leader>de", vim.diagnostic.open_float, bopts("Show diagnostic"))
   vim.keymap.set("n", "<leader>dq", vim.diagnostic.setloclist, bopts("Diagnostics → loclist"))
-  vim.keymap.set({ "n", "v" }, "ff", function()
-    vim.lsp.buf.format({ async = true })
-  end, bopts("Format buffer"))
   vim.keymap.set("n", "<leader>dj", function()
-    vim.diagnostic.goto_next()
+    vim.diagnostic.jump({ count = 1, float = true })
   end, bopts("Next diagnostic"))
   vim.keymap.set("n", "<leader>dk", function()
-    vim.diagnostic.goto_prev()
+    vim.diagnostic.jump({ count = -1, float = true })
   end, bopts("Previous diagnostic"))
   vim.keymap.set({ "n", "v" }, "<leader>da", vim.lsp.buf.code_action, bopts("Code action"))
   vim.keymap.set("n", "<leader>dw", function()
@@ -86,7 +74,6 @@ local capabilities =
 
 vim.lsp.config("*", {
   on_attach = on_attach,
-  handlers = handlers,
   capabilities = capabilities,
 })
 

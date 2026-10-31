@@ -3,7 +3,7 @@
 ## Install dependencies
 
 ```bash
-$ brew install neovim fd clojure-lsp/brew/clojure-lsp-native
+$ brew install neovim fd stylua clojure-lsp/brew/clojure-lsp-native
 ```
 
 ## Install configuration
@@ -19,7 +19,7 @@ $ git clone git@github.com:k13gomez/nvim-config.git ~/.config/nvim
 $ nvim
 ```
 
-On first launch, vim-plug bootstraps itself and runs `:PlugInstall` to fetch every plugin. Restart `nvim` once it finishes.
+On first launch, the built-in `vim.pack` asks to install the plugins. It records each plugin revision in `nvim-pack-lock.json`. Keep that file in git.
 
 ## Useful links
 
@@ -40,10 +40,9 @@ The popup at runtime is provided by [which-key.nvim](https://github.com/folke/wh
 | `<leader>sv` | n | Source vimrc |
 | `<leader>tab` | n | New tab |
 | `<leader>rt` | n | Retab |
-| `<leader>tn` | n | Toggle line numbers |
+| `<leader>tl` | n | Toggle line numbers |
 | `<leader>tp` | n | Toggle paste mode |
 | `<leader>ti` | n | Toggle parinfer |
-| `<leader>gg` / `<leader>gd` / `<leader>gt` | n | GitGutter on / off / toggle |
 
 ## Insert / utilities (`<leader>u…`)
 
@@ -55,7 +54,24 @@ The popup at runtime is provided by [which-key.nvim](https://github.com/folke/wh
 | `<leader>uts` | Insert ISO-8601 timestamp |
 | `<leader>ufx` | Pretty-print XML buffer |
 | `<leader>ufj` | Pretty-print JSON buffer |
-| `<leader>ufl` | Format Lua buffer (stylua) |
+
+## Plugins (`<leader>p…`)
+
+| Key | Action |
+|---|---|
+| `<leader>pu` | Update plugins. Review the changes, then `:w` to apply or `:q` to cancel |
+| `<leader>pl` | List the installed plugins (no network) |
+| `<leader>pc` | Delete the plugins that are no longer in `lua/bootstrap.lua` |
+
+## Git (gitsigns, buffer-local)
+
+| Key | Action |
+|---|---|
+| `]c` / `[c` | Next / previous hunk |
+| `<leader>Gp` | Preview hunk |
+| `<leader>Gs` / `<leader>Gr` | Stage / reset hunk |
+| `<leader>Gb` | Blame line |
+| `<leader>Gt` | Toggle git signs |
 
 ## Files & buffers
 
@@ -130,13 +146,13 @@ Bindings work in both normal and visual modes.
 | `<leader>crn` | Reload current ns |
 | `<leader>crr` | Reset clara rules cache |
 
-## LSP (buffer-local on attach)
+## LSP (buffer-local on attach, except `<leader>df`)
 
 | Key | Mode | Action |
 |---|---|---|
 | `gd` | n | Goto definition |
 | `K` | n | Hover |
-| `ff` | n, v | Format buffer |
+| `<leader>df` | n, v | Format buffer (conform.nvim, LSP fallback) |
 | `<leader>dd` | n | Goto declaration |
 | `<leader>dt` | n | Goto type definition |
 | `<leader>ds` | n | Signature help |

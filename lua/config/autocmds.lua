@@ -7,14 +7,6 @@ vim.api.nvim_create_autocmd("TabLeave", {
   end,
 })
 
-vim.api.nvim_create_autocmd("BufWritePre", {
-  group = group,
-  pattern = { "*.tf", "*.tfvars" },
-  callback = function()
-    vim.lsp.buf.format()
-  end,
-})
-
 vim.api.nvim_create_autocmd("FileType", {
   group = group,
   pattern = { "elixir", "eelixir", "heex", "surface" },
@@ -23,16 +15,6 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.bo[args.buf].tabstop = 2
     vim.bo[args.buf].softtabstop = 2
     vim.bo[args.buf].expandtab = true
-  end,
-})
-
--- elixir-ls is slow until the project has compiled, so give it a longer leash
--- than the terraform formatter above.
-vim.api.nvim_create_autocmd("BufWritePre", {
-  group = group,
-  pattern = { "*.ex", "*.exs", "*.heex", "*.eex" },
-  callback = function()
-    vim.lsp.buf.format({ timeout_ms = 3000 })
   end,
 })
 
