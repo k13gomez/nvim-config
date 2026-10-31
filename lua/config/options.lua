@@ -30,3 +30,10 @@ vim.opt.winborder = "single"
 
 vim.g.mapleader = ","
 vim.g.maplocalleader = ","
+
+-- Terminal buffers stand in for tmux, so children must not think they're inside it:
+-- byobu-launch in .zshrc would nest a session, and the zsh tmux hooks would rename
+-- the window hosting nvim.
+vim.env.TMUX = nil
+vim.env.TMUX_PANE = nil
+vim.env.BYOBU_DISABLE = "1"

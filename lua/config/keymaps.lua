@@ -28,6 +28,25 @@ map("n", "<leader>fs", function()
   require("material.functions").find_style()
 end, { desc = "Find material style" })
 
+map("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+map("t", "<C-v><Esc>", "<Esc>", { desc = "Send Esc to terminal job" })
+map("t", "<C-w>", "<C-\\><C-n><C-w>", { desc = "Window command from terminal" })
+map("n", "<leader>Tt", "<cmd>tab terminal<cr>", { desc = "Terminal in new tab" })
+map("n", "<leader>Tv", "<cmd>vertical terminal<cr>", { desc = "Terminal in vertical split" })
+map("n", "<leader>Ts", "<cmd>horizontal terminal<cr>", { desc = "Terminal in horizontal split" })
+map("n", "<leader>Tr", function()
+  if vim.bo.buftype ~= "terminal" then
+    return vim.notify("Not a terminal buffer")
+  end
+  vim.ui.input({ prompt = "Terminal name: ", default = vim.b.term_name or "" }, function(name)
+    if name == nil then
+      return
+    end
+    vim.b.term_name = name ~= "" and name or nil
+    require("lualine").refresh({ place = { "tabline", "statusline" } })
+  end)
+end, { desc = "Rename terminal (empty = automatic)" })
+
 map("n", "<leader>tl", function()
   vim.opt.number = not vim.opt.number:get()
 end, { desc = "Toggle line numbers" })

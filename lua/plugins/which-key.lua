@@ -29,5 +29,6 @@ wk.setup({
     { "<leader>g", group = "conjure: goto" },
     { "<leader>s", group = "conjure: session" },
     { "<leader>x", group = "conjure: expand" },
+    { "<leader>T", group = "terminal" },
   },
 })
