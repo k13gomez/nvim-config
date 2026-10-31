@@ -1,4 +1,7 @@
-# Neovim Configuration for Clojure
+# Neovim configuration for Clojure and Elixir
+
+The theme is material.nvim (deep ocean) with lualine. Press `<leader>fs` to switch the style.
+Elixir files format on save through elixir-ls. Terraform files format on save through `terraform fmt`.
 
 ## Install dependencies
 

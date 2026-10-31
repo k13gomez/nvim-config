@@ -4,7 +4,7 @@ vim.api.nvim_create_autocmd("PackChanged", {
   callback = function(ev)
     local name, kind = ev.data.spec.name, ev.data.kind
     if name == "parinfer-rust" and (kind == "install" or kind == "update") then
-      vim.system({ "cargo", "build", "--release" }, { cwd = ev.data.path })
+      vim.system({ "cargo", "build", "--release" }, { cwd = ev.data.path }):wait()
     end
     if name == "nvim-treesitter" and kind == "update" then
       if not ev.data.active then
@@ -44,6 +44,7 @@ vim.pack.add({
   gh("tpope/vim-fugitive"),
   gh("lewis6991/gitsigns.nvim"),
   gh("marko-cerovac/material.nvim"),
+  gh("nvim-lualine/lualine.nvim"),
   gh("HiPhish/rainbow-delimiters.nvim"),
   gh("nvim-tree/nvim-web-devicons"),
   gh("MunifTanjim/nui.nvim"),
