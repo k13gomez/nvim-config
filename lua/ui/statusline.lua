@@ -35,8 +35,8 @@ local function file_name(name)
 end
 
 lualine.setup({
-  -- "material" can resolve to lualine's own built-in theme, so use the name only material.nvim ships.
-  options = { theme = "material-nvim" },
+  -- "auto" loads the lualine theme named after g:colors_name, i.e. tokyonight's per-style themes.
+  options = { theme = "auto" },
   sections = {
     lualine_a = { "mode" },
     lualine_b = { "branch", "diff", "diagnostics" },

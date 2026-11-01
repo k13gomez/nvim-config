@@ -48,10 +48,6 @@
       "rev": "221ce6b2d999187044529f49da6554a92f740a96",
       "src": "https://github.com/nvim-lualine/lualine.nvim"
     },
-    "material.nvim": {
-      "rev": "92f7366a9315cd386bc4fa4d716fde375dda210f",
-      "src": "https://github.com/marko-cerovac/material.nvim"
-    },
     "neo-tree.nvim": {
       "rev": "bb9779f532ef9ec62486a840fb5db44591aeff0f",
       "src": "https://github.com/nvim-neo-tree/neo-tree.nvim"
@@ -96,6 +92,10 @@
     "telescope.nvim": {
       "rev": "40aedd8a68c78a656a10a8d62d80c54af59420fb",
       "src": "https://github.com/nvim-telescope/telescope.nvim"
+    },
+    "tokyonight.nvim": {
+      "rev": "cdc07ac78467a233fd62c493de29a17e0cf2b2b6",
+      "src": "https://github.com/folke/tokyonight.nvim"
     },
     "vim-case-master": {
       "rev": "8687e9a7ec5353dfdd93bf51a01776e43af8d10f",

@@ -1,6 +1,6 @@
 # Neovim configuration for Clojure and Elixir
 
-The theme is material.nvim (deep ocean) with lualine. Press `<leader>fs` to switch the style.
+The theme is tokyonight.nvim (night style by default) with lualine. Press `<leader>fs` to switch the style; the choice is kept across restarts.
 Elixir files format on save through elixir-ls. Terraform files format on save through `terraform fmt`.
 
 ## Install dependencies
@@ -84,7 +84,7 @@ The popup at runtime is provided by [which-key.nvim](https://github.com/folke/wh
 | `<leader>fg` | Telescope: live grep |
 | `<leader>fb` | Telescope: buffers |
 | `<leader>fh` | Telescope: help tags |
-| `<leader>fs` | Telescope: switch the material style for this session |
+| `<leader>fs` | Telescope: switch the tokyonight style, with live preview (remembered across restarts) |
 
 ## Tabs
 

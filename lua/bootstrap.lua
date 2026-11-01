@@ -43,7 +43,7 @@ vim.pack.add({
   gh("mhinz/vim-startify"),
   gh("tpope/vim-fugitive"),
   gh("lewis6991/gitsigns.nvim"),
-  gh("marko-cerovac/material.nvim"),
+  gh("folke/tokyonight.nvim"),
   gh("nvim-lualine/lualine.nvim"),
   gh("HiPhish/rainbow-delimiters.nvim"),
   gh("nvim-tree/nvim-web-devicons"),
