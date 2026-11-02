@@ -1,5 +1,9 @@
 # Neovim configuration for Clojure and Elixir
 
+## Why two quantum entangled configs
+
+I like Neovim, and it's where I feel at home. I've also always wanted the Clojure integration that CIDER gives Emacs. This pair of configs gets me both: my own Neovim configuration, ported into Emacs. That goes further than switching on evil mode or installing a prepackaged Doom Emacs. The Emacs side works like the Neovim setup I already know, not like someone else's take on Vim inside Emacs.
+
 This configuration is kept in sync with [k13gomez/emacs-config](https://github.com/k13gomez/emacs-config) through quantum entanglement.
 
 The theme is tokyonight.nvim (night style by default) with lualine. Press `,fs` to switch the style; the choice is kept across restarts.
