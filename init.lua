@@ -1,5 +1,8 @@
+vim.g.start_time = vim.uv.hrtime()
+
 require("bootstrap")
 require("plugins.misc")
+require("plugins.startify")
 require("plugins.sexp")
 
 require("config.options")
