@@ -72,8 +72,8 @@ map("n", "<leader>,<<<<", "<cmd>horizontal resize -20<cr>", { desc = "Shorter -2
 map("n", "<leader>repl", "<cmd>ConjureCljConnectPortFile<cr>", { desc = "Connect Conjure REPL" })
 map("n", "<leader>rt", "<cmd>retab<cr>", { desc = "Retab" })
 
-map("n", "case", "<cmd>CaseMasterRotateCase<cr>", { silent = true, desc = "Rotate case" })
-map("v", "case", "<cmd>CaseMasterRotateCaseVisual<cr>", { silent = true, desc = "Rotate case (visual)" })
+map("n", "csr", "<cmd>CaseMasterRotateCase<cr>", { silent = true, desc = "Rotate case" })
+map("v", "csr", "<cmd>CaseMasterRotateCaseVisual<cr>", { silent = true, desc = "Rotate case (visual)" })
 map("n", "css", "<cmd>CaseMasterConvertToSnake<cr>", { silent = true, desc = "→ snake_case" })
 map("n", "csk", "<cmd>CaseMasterConvertToKebab<cr>", { silent = true, desc = "→ kebab-case" })
 map("n", "csc", "<cmd>CaseMasterConvertToCamel<cr>", { silent = true, desc = "→ camelCase" })

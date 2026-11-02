@@ -118,7 +118,7 @@ Bindings work in both normal and visual modes.
 
 | Key | Action |
 |---|---|
-| `case` | Rotate case |
+| `csr` | Rotate case |
 | `css` | → `snake_case` |
 | `csk` | → `kebab-case` |
 | `csc` | → `camelCase` |
