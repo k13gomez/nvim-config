@@ -31,10 +31,12 @@ vim.api.nvim_create_autocmd("User", {
 })
 
 -- Leaving the start screen, resizing or a style switch must remove the old image.
-vim.api.nvim_create_autocmd({ "BufLeave", "VimResized", "ColorScheme" }, {
+-- Coming back to it, for example when the ,fs picker closes, draws the image again.
+vim.api.nvim_create_autocmd({ "BufEnter", "BufLeave", "VimResized", "ColorScheme" }, {
   group = group,
   callback = function(args)
-    if image.enabled() and (args.event ~= "BufLeave" or vim.bo[args.buf].filetype == "startify") then
+    local buffer_event = args.event == "BufEnter" or args.event == "BufLeave"
+    if image.enabled() and (not buffer_event or vim.bo[args.buf].filetype == "startify") then
       vim.schedule(image.refresh)
     end
   end,

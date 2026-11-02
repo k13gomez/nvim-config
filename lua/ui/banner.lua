@@ -61,6 +61,11 @@ local function sixel()
     local data = read(path)
     local file_w, file_h = (data or ""):match('^\027P[^q]*q"1;1;(%d+);(%d+)')
     if tonumber(file_w) ~= w or tonumber(file_h) ~= h then
+      -- In a floating window, such as the ,fs picker, Normal reports the float's background.
+      -- The render waits until the float closes.
+      if vim.api.nvim_win_get_config(0).relative ~= "" then
+        return ""
+      end
       data = render(path, w, h)
     end
     cache[name] = data or ""
