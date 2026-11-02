@@ -4,6 +4,7 @@ local clj = require("helpers.clojure")
 local ex = require("helpers.elixir")
 
 map("n", "<leader>tab", "<cmd>tabnew<cr>", { desc = "New tab" })
+map("n", "<leader>h", "<cmd>Startify<cr>", { desc = "Start screen" })
 
 map("n", "<leader>bw", "<cmd>w<cr>", { desc = "Write buffer" })
 map("n", "<leader>bq", "<cmd>q<cr>", { desc = "Quit buffer" })
