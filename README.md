@@ -11,13 +11,13 @@ This configuration is kept in sync with [k13gomez/emacs-config](https://github.c
 The theme is tokyonight.nvim (night style by default) with lualine. Press `,fs` to switch the style; the choice is kept across restarts.
 Elixir and HEEx files format on save through elixir-ls. Terraform files format on save through `terraform fmt`.
 Plugins come from `vim.pack`, which is built into Neovim 0.12.
-The start screen shows `neovimium.png` as a sixel image inside tmux with sixel support. Other terminals show the text banner.
+The start screen shows a sixel image of `neovimium.png` inside tmux, if the terminal supports sixel. Other terminals show the text banner.
 
 ## Install dependencies
 
 ```bash
 $ brew install ripgrep stylua clojure-lsp/brew/clojure-lsp-native elixir-ls lua-language-server
-$ brew install neovim fd tree-sitter-cli rust imagemagick
+$ brew install neovim fd tree-sitter-cli rust
 ```
 
 Terraform formatting needs `terraform` on the `PATH`, and Copilot needs Node. The icons need a Nerd Font in the terminal.
@@ -359,6 +359,8 @@ Any filetype whose tree-sitter parser has a fold query folds by syntax. Folds st
 ## Start screen (Startify)
 
 The start screen lists recent files and shows how long startup took. `,h` opens it again.
+
+The terminal image comes from `sixels/<colorscheme>.sixel`, for example `sixels/tokyonight-night.sixel`. A colorscheme without a file gets one rendered with ImageMagick on the first start, and later starts use it again. After a change to `neovimium.png`, delete the files in `sixels/` to render them again. A file is also rendered again when the terminal's cell size changes.
 
 | Key | Action |
 |---|---|

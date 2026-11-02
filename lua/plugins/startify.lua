@@ -2,14 +2,7 @@ local image = require("ui.banner")
 
 local stats
 
-local banner = {
-  "██╗  ██╗ ██╗██████╗  ██████╗  ██████╗ ███╗   ███╗███████╗███████╗",
-  "██║ ██╔╝███║╚════██╗██╔════╝ ██╔═══██╗████╗ ████║██╔════╝╚══███╔╝",
-  "█████╔╝ ╚██║ █████╔╝██║  ███╗██║   ██║██╔████╔██║█████╗    ███╔╝",
-  "██╔═██╗  ██║ ╚═══██╗██║   ██║██║   ██║██║╚██╔╝██║██╔══╝   ███╔╝",
-  "██║  ██╗ ██║██████╔╝╚██████╔╝╚██████╔╝██║ ╚═╝ ██║███████╗███████╗",
-  "╚═╝  ╚═╝ ╚═╝╚═════╝  ╚═════╝  ╚═════╝ ╚═╝     ╚═╝╚══════╝╚══════╝",
-}
+local banner = vim.fn.readfile(vim.fn.stdpath("config") .. "/banner.txt")
 
 function _G.startify_header()
   -- Memoized so a later :Startify keeps showing startup time, not time since launch.
@@ -37,11 +30,11 @@ vim.api.nvim_create_autocmd("User", {
   end,
 })
 
--- Leaving the start screen or resizing must remove the old image.
-vim.api.nvim_create_autocmd({ "BufLeave", "VimResized" }, {
+-- Leaving the start screen, resizing or a style switch must remove the old image.
+vim.api.nvim_create_autocmd({ "BufLeave", "VimResized", "ColorScheme" }, {
   group = group,
   callback = function(args)
-    if image.enabled() and (args.event == "VimResized" or vim.bo[args.buf].filetype == "startify") then
+    if image.enabled() and (args.event ~= "BufLeave" or vim.bo[args.buf].filetype == "startify") then
       vim.schedule(image.refresh)
     end
   end,
