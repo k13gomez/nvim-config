@@ -36,6 +36,8 @@ vim.opt.timeoutlen = 200
 -- Terminal buffers stand in for tmux, so children must not think they're inside it:
 -- byobu-launch in .zshrc would nest a session, and the zsh tmux hooks would rename
 -- the window hosting nvim.
+-- ui/banner.lua still asks tmux for the cell size, so it keeps the original values.
+vim.g.tmux_env = { TMUX = vim.env.TMUX, TMUX_PANE = vim.env.TMUX_PANE }
 vim.env.TMUX = nil
 vim.env.TMUX_PANE = nil
 vim.env.BYOBU_DISABLE = "1"

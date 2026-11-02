@@ -1,5 +1,7 @@
 # Neovim configuration for Clojure and Elixir
 
+<p align="center"><img src="neovimium.png" alt="Neovimium entangled with Emacsium" width="800"></p>
+
 ## Why two quantum entangled configs
 
 I like Neovim, and it's where I feel at home. I've also always wanted the Clojure integration that CIDER gives Emacs. This pair of configs gets me both: my own Neovim configuration, ported into Emacs. That goes further than switching on evil mode or installing a prepackaged Doom Emacs. The Emacs side works like the Neovim setup I already know, not like someone else's take on Vim inside Emacs.
@@ -9,12 +11,13 @@ This configuration is kept in sync with [k13gomez/emacs-config](https://github.c
 The theme is tokyonight.nvim (night style by default) with lualine. Press `,fs` to switch the style; the choice is kept across restarts.
 Elixir and HEEx files format on save through elixir-ls. Terraform files format on save through `terraform fmt`.
 Plugins come from `vim.pack`, which is built into Neovim 0.12.
+The start screen shows `neovimium.png` as a sixel image inside tmux with sixel support. Other terminals show the text banner.
 
 ## Install dependencies
 
 ```bash
 $ brew install ripgrep stylua clojure-lsp/brew/clojure-lsp-native elixir-ls lua-language-server
-$ brew install neovim fd tree-sitter-cli rust
+$ brew install neovim fd tree-sitter-cli rust imagemagick
 ```
 
 Terraform formatting needs `terraform` on the `PATH`, and Copilot needs Node. The icons need a Nerd Font in the terminal.
