@@ -45,7 +45,7 @@ On first launch, `vim.pack` asks to install the plugins. It records each plugin 
 
 `<leader>` = `,` &nbsp;·&nbsp; `<localleader>` = `,` (same key)
 
-Press a prefix and wait ~300ms for the which-key popup. Leader keys work in normal mode unless a table says otherwise.
+Press a prefix and the which-key popup opens at once. Leader keys work in normal mode unless a table says otherwise.
 To run any command by name, press `,:`. The mouse is on, and the scroll wheel moves the cursor down and up (`j` / `k`).
 
 ## General
@@ -154,7 +154,7 @@ Horizontal (taller / shorter):
 | `,,>>>` / `,,<<<` | ±10 |
 | `,,>>>>` / `,,<<<<` | ±20 |
 
-After `,>>` or `,<<`, Neovim waits up to 1 second for another `>` or `<` before it resizes.
+After `,>>` or `,<<`, Neovim waits up to 200 ms for another `>` or `<` before it resizes.
 
 ## Terminal
 

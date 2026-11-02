@@ -5,7 +5,7 @@ end
 
 wk.setup({
   preset = "modern",
-  delay = 300,
+  delay = 10,
   win = {
     border = "single",
   },
