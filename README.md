@@ -3,13 +3,14 @@
 This configuration is kept in sync with [k13gomez/emacs-config](https://github.com/k13gomez/emacs-config) through quantum entanglement.
 
 The theme is tokyonight.nvim (night style by default) with lualine. Press `,fs` to switch the style; the choice is kept across restarts.
-Elixir files format on save through elixir-ls. Terraform files format on save through `terraform fmt`.
+Elixir and HEEx files format on save through elixir-ls. Terraform files format on save through `terraform fmt`.
 Plugins come from `vim.pack`, which is built into Neovim 0.12.
 
 ## Install dependencies
 
 ```bash
-$ brew install neovim fd ripgrep tree-sitter-cli rust stylua clojure-lsp/brew/clojure-lsp-native elixir-ls lua-language-server
+$ brew install ripgrep stylua clojure-lsp/brew/clojure-lsp-native elixir-ls lua-language-server
+$ brew install neovim fd tree-sitter-cli rust
 ```
 
 Terraform formatting needs `terraform` on the `PATH`, and Copilot needs Node. The icons need a Nerd Font in the terminal.
@@ -40,7 +41,7 @@ On first launch, `vim.pack` asks to install the plugins. It records each plugin 
 
 `<leader>` = `,` &nbsp;·&nbsp; `<localleader>` = `,` (same key)
 
-Press a prefix and wait ~300ms for the which-key popup.
+Press a prefix and wait ~300ms for the which-key popup. Leader keys work in normal mode unless a table says otherwise.
 To run any command by name, press `,:`. The mouse is on, and the scroll wheel moves the cursor down and up (`j` / `k`).
 
 ## General
@@ -53,15 +54,15 @@ To run any command by name, press `,:`. The mouse is on, and the scroll wheel mo
 | `,nt` | Terminal in new tab |
 | `,bw` / `,bW` | Write buffer / write all buffers |
 | `,bq` / `,bQ` | Quit buffer / quit all |
-| `,bx` | Write all and quit (force) |
+| `,bx` | Write all and quit all (force) |
 | `,bX` | Quit all, discarding changes |
 | `,qq` | Quit |
 | `,qa` | Quit all |
 | `,qw` | Write and quit |
 | `,qs` | Write all and quit all |
-| `,rt` | Retab |
+| `,rt` | Retab (tabs to spaces) |
 | `,tl` | Toggle line numbers |
-| `,ti` | Toggle parinfer |
+| `,ti` | Toggle parinfer in every buffer |
 | `C-l` | Clear search highlight and redraw |
 
 ## Insert / utilities (`,u…`)
@@ -85,7 +86,7 @@ To run any command by name, press `,:`. The mouse is on, and the scroll wheel mo
 
 ## Git (gitsigns)
 
-These keys are local to buffers in a git repo. Use `:Git` (fugitive) for the full git interface.
+Signs in the sign column mark changed lines. Use `:Git` (fugitive) for the full git interface.
 
 | Key | Action |
 |---|---|
@@ -104,23 +105,26 @@ These keys are local to buffers in a git repo. Use `:Git` (fugitive) for the ful
 | `,fb` | Buffers |
 | `,fh` | Help tags |
 | `,fs` | Switch the tokyonight style, with live preview (remembered across restarts) |
-| `C-t` | In a Telescope picker: open the selection in a new tab |
+| `C-t` | In a picker: open the selection in a new tab |
 
 ## File tree (neo-tree)
 
-The tree opens on the right and follows the current file. It closes when it's the last window left.
+The tree opens on the right and follows the current file. It hides dotfiles and gitignored files.
 
 | Key | Action |
 |---|---|
 | `,tt` | Toggle the file tree |
 | `\` | Reveal the current file in the tree |
+| `Enter` | In the tree: open the file |
 | `Space` | In the tree: expand / collapse the node |
+| `t` | In the tree: open the file in a new tab |
+| `H` | In the tree: show / hide dotfiles |
 | `Esc` | In the tree: close the preview |
 | `C-x` | In the tree: clear the filter |
 
 ## Tabs
 
-The tabline is always shown. A tab is named `dir/file` after its buffer, or after the title of the terminal in it.
+The tab bar is always shown, with tab numbers. A tab is named `dir/file` after its buffer, or after the title of the terminal in it.
 
 | Key | Action |
 |---|---|
@@ -146,7 +150,7 @@ Horizontal (taller / shorter):
 | `,,>>>` / `,,<<<` | ±10 |
 | `,,>>>>` / `,,<<<<` | ±20 |
 
-After `,>>` or `,<<`, Neovim waits for `timeoutlen` in case another `>` or `<` follows.
+After `,>>` or `,<<`, Neovim waits up to 1 second for another `>` or `<` before it resizes.
 
 ## Terminal
 
@@ -179,28 +183,28 @@ The `cs` keys work in normal and visual mode.
 
 | Key | Mode | Action |
 |---|---|---|
-| `gc{motion}` / `gcc` | n, x | Comment or uncomment |
-| `ga{motion}` | n, x | Align on a character (EasyAlign) |
-| `(` | n, x, o | Clojure, Fennel, Scheme, Lisp: move to the open bracket of the enclosing list |
-| `)` | n, x, o | Clojure, Fennel, Scheme, Lisp: move to the close bracket of the enclosing list |
+| `gc{motion}` / `gcc` | n, v | Comment or uncomment |
+| `ga{motion}` | n, v | Align on a character (EasyAlign) |
+| `(` | n, v, o | Move to the open bracket of the enclosing list |
+| `)` | n, v, o | Move to the close bracket of the enclosing list |
 
-Brackets inside strings, regexes, comments and char literals don't count for `(` and `)`. Parinfer does the structural editing.
+`(` and `)` work in Clojure, Fennel, Scheme and Lisp buffers. Brackets inside strings, regexes, comments and char literals don't count. Parinfer does the structural editing.
 
 ## Clojure (Conjure / Portal)
 
-These keys are local to Clojure buffers. Most are Conjure's defaults. Conjure doesn't start a REPL on its own, so connect to a running one.
+These keys are local to Clojure buffers. Conjure doesn't start a REPL on its own, so connect to a running one. Most keys are Conjure's defaults.
 
 Connection and sessions:
 
 | Key | Action |
 |---|---|
-| `,repl` / `,cf` | Connect to the REPL in the project's port file |
+| `,repl` / `,cf` | Connect to a REPL |
 | `,cd` | Disconnect |
-| `,sc` / `,sf` | Clone the current session / start a fresh one |
 | `,sq` / `,sQ` | Close the current session / all sessions |
 | `,sl` | List sessions |
-| `,sn` / `,sp` | Next / previous session |
 | `,ss` | Select a session |
+| `,sc` / `,sf` | Clone the current session / start a fresh one |
+| `,sn` / `,sp` | Next / previous session |
 
 Evaluation:
 
@@ -226,20 +230,20 @@ Log:
 |---|---|
 | `,ls` / `,lv` | Show the log in a horizontal / vertical split |
 | `,lt` / `,le` | Show the log in a new tab / the current window |
-| `,lq` | Close the log windows in this tab |
-| `,lr` / `,lR` | Soft / hard reset the log |
 | `,ll` | Jump to the latest result in the log |
+| `,lr` / `,lR` | Soft / hard reset the log |
+| `,lq` | Close the log windows in this tab |
 
 Navigation, views and macros:
 
 | Key | Action |
 |---|---|
 | `,gd` | Goto definition |
+| `,x1` / `,xr` / `,xa` | Macroexpand once / `macroexpand` / fully |
 | `,vs` | View the source of the symbol at cursor |
 | `,ve` | View the last exception |
 | `,v1` / `,v2` / `,v3` | View the last / 2nd / 3rd result |
 | `,vt` | View and clear the tap queue |
-| `,x1` / `,xr` / `,xa` | Macroexpand once / `macroexpand` / fully |
 
 Tests and reloading:
 
@@ -265,8 +269,6 @@ Portal and helpers:
 | `,cj` | JVM PID |
 | `,cw` | Enable `*warn-on-reflection*` |
 
-In `deps.edn`, completion offers the versions of a library.
-
 ## Elixir (Conjure / mix)
 
 These keys are local to Elixir buffers. The Conjure evaluation and log keys from the Clojure section work here too, sending code to iex.
@@ -284,44 +286,46 @@ These keys are local to Elixir buffers. The Conjure evaluation and log keys from
 | `,md` | mix: `deps.get` |
 | `,dl` | Run the elixir-ls test lens on this line |
 
-The `mix` keys run in a 15-line split at the bottom. Once the command finishes, `q` closes the split.
+The `mix` keys show their output in a 15-line split at the bottom; once the command finishes, `q` closes it.
 
 ## LSP
 
-The language servers are clojure-lsp, elixir-ls and lua-language-server. All keys except `,df` are set when a server attaches to the buffer. Diagnostics show as signs, without inline text.
+The language servers are clojure-lsp, elixir-ls and lua-language-server. All keys except `,df` exist only in buffers with a server. Diagnostics are underlined and marked by a sign, without inline text.
 
 | Key | Mode | Action |
 |---|---|---|
 | `gd` | n | Goto definition |
-| `K` | n | Hover |
+| `K` | n | Documentation (hover) |
 | `,df` | n, v | Format buffer (conform, LSP fallback) |
 | `,dd` | n | Goto declaration |
 | `,dt` | n | Goto type definition |
 | `,ds` | n | Signature help |
 | `,dn` | n | Rename symbol |
 | `,de` | n | Show diagnostic at cursor |
-| `,dq` | n | Diagnostics → location list |
+| `,dq` | n | List buffer diagnostics (location list) |
 | `,dj` / `,dk` | n | Next / previous diagnostic |
 | `,da` | n, v | Code action |
-| `,dw` | n | Workspace diagnostics (Telescope) |
-| `,dr` | n | References (Telescope) |
-| `,di` | n | Implementations (Telescope) |
+| `,dw` | n | Workspace diagnostics |
+| `,dr` | n | References |
+| `,di` | n | Implementations |
 | `,dl` | n | Run code lens |
 
 ## Completion (nvim-cmp, insert mode)
 
-Completion also works on the `:` command line and in `/` and `?` searches.
+The popup opens as you type. Completion also works on the `:` command line and in `/` and `?` searches.
 
 | Key | Action |
 |---|---|
 | `C-Space` | Trigger completion |
 | `C-b` / `C-f` | Scroll docs up / down |
 | `C-e` | Abort |
-| `CR` | Confirm the selected item, or insert a newline if none is selected |
+| `Enter` | Confirm the selected item, or insert a newline if none is selected |
+
+In `deps.edn`, completion also offers the versions of a library.
 
 ## Copilot
 
-These are copilot.vim's default keys.
+Suggestions show as dimmed text at the cursor.
 
 | Key | Action |
 |---|---|
@@ -329,7 +333,7 @@ These are copilot.vim's default keys.
 | `Tab` | Accept the suggestion |
 | `M-]` / `M-[` | Next / previous suggestion |
 | `M-Right` | Accept the next word |
-| `M-C-Right` | Accept the next line |
+| `C-M-Right` | Accept the next line |
 | `C-]` | Dismiss the suggestion |
 
 ## Folding
@@ -352,5 +356,4 @@ The start screen lists recent files and shows how long startup took. `,h` opens 
 | Key | Action |
 |---|---|
 | `e` | New empty buffer |
-| `q` | Quit |
-| A listed number | Open that file |
+| `q` | Leave the start screen |
