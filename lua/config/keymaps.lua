@@ -3,7 +3,8 @@ local text = require("helpers.text")
 local clj = require("helpers.clojure")
 local ex = require("helpers.elixir")
 
-map("n", "<leader>nt", "<cmd>tabnew<cr>", { desc = "New tab" })
+map("n", "<leader>ne", "<cmd>tabnew<cr>", { desc = "Empty buffer in new tab" })
+map("n", "<leader>nt", "<cmd>tab terminal<cr>", { desc = "Terminal in new tab" })
 map("n", "<leader>h", "<cmd>Startify<cr>", { desc = "Start screen" })
 
 map("n", "<leader>bw", "<cmd>w<cr>", { desc = "Write buffer" })

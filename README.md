@@ -40,7 +40,8 @@ The popup at runtime is provided by [which-key.nvim](https://github.com/folke/wh
 
 | Key | Mode | Action |
 |---|---|---|
-| `<leader>nt` | n | New tab |
+| `<leader>ne` | n | Empty buffer in new tab |
+| `<leader>nt` | n | Terminal in new tab |
 | `<leader>rt` | n | Retab |
 | `<leader>tl` | n | Toggle line numbers |
 | `<leader>ti` | n | Toggle parinfer |

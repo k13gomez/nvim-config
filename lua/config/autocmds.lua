@@ -9,7 +9,7 @@ vim.api.nvim_create_autocmd("TabLeave", {
 
 vim.api.nvim_create_autocmd("FileType", {
   group = group,
-  pattern = { "elixir", "eelixir", "heex", "surface" },
+  pattern = { "elixir", "eelixir", "heex", "surface", "json", "jsonc" },
   callback = function(args)
     vim.bo[args.buf].shiftwidth = 2
     vim.bo[args.buf].tabstop = 2
