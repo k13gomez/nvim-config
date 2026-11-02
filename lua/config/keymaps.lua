@@ -14,6 +14,11 @@ map("n", "<leader>bQ", "<cmd>qa<cr>", { desc = "Quit all buffers" })
 map("n", "<leader>bx", "<cmd>wqa!<cr>", { desc = "Write all & quit all (force)" })
 map("n", "<leader>bX", "<cmd>qa!<cr>", { desc = "Quit all (force, discard)" })
 
+map("n", "<leader>qq", "<cmd>q<cr>", { desc = "Quit" })
+map("n", "<leader>qa", "<cmd>qa<cr>", { desc = "Quit all" })
+map("n", "<leader>qw", "<cmd>wq<cr>", { desc = "Write and quit" })
+map("n", "<leader>qs", "<cmd>wqa<cr>", { desc = "Write all and quit all" })
+
 map("n", "<leader>uh", text.hash, { desc = "Insert random hex hash" })
 map("n", "<leader>uu", text.guid, { desc = "Insert UUID" })
 map("n", "<leader>ue", text.empty_guid, { desc = "Insert empty UUID" })

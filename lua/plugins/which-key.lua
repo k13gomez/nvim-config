@@ -18,6 +18,7 @@ wk.setup({
     { "<leader>m", group = "elixir / mix" },
     { "<leader>n", group = "new" },
     { "<leader>p", group = "plugins" },
+    { "<leader>q", group = "quit" },
     { "<leader>G", group = "git" },
     { "<leader>t", group = "tabs / toggles" },
     { "<leader>u", group = "insert / utilities" },

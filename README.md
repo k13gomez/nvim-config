@@ -42,6 +42,10 @@ The popup at runtime is provided by [which-key.nvim](https://github.com/folke/wh
 |---|---|---|
 | `<leader>ne` | n | Empty buffer in new tab |
 | `<leader>nt` | n | Terminal in new tab |
+| `<leader>qq` | n | Quit |
+| `<leader>qa` | n | Quit all |
+| `<leader>qw` | n | Write and quit |
+| `<leader>qs` | n | Write all and quit all |
 | `<leader>rt` | n | Retab |
 | `<leader>tl` | n | Toggle line numbers |
 | `<leader>ti` | n | Toggle parinfer |
