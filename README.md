@@ -1,5 +1,7 @@
 # Neovim configuration for Clojure and Elixir
 
+It is kept in sync with [k13gomez/emacs-config](https://github.com/k13gomez/emacs-config) through quantum entanglement, so the same keys work in both editors.
+
 The theme is tokyonight.nvim (night style by default) with lualine. Press `<leader>fs` to switch the style; the choice is kept across restarts.
 Elixir files format on save through elixir-ls. Terraform files format on save through `terraform fmt`.
 
