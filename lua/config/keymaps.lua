@@ -3,7 +3,7 @@ local text = require("helpers.text")
 local clj = require("helpers.clojure")
 local ex = require("helpers.elixir")
 
-map("n", "<leader>tab", "<cmd>tabnew<cr>", { desc = "New tab" })
+map("n", "<leader>nt", "<cmd>tabnew<cr>", { desc = "New tab" })
 map("n", "<leader>h", "<cmd>Startify<cr>", { desc = "Start screen" })
 
 map("n", "<leader>bw", "<cmd>w<cr>", { desc = "Write buffer" })
@@ -52,10 +52,8 @@ map("n", "<leader>tl", function()
   vim.opt.number = not vim.opt.number:get()
 end, { desc = "Toggle line numbers" })
 
-local parinfer_on = false
 map("n", "<leader>ti", function()
-  parinfer_on = not parinfer_on
-  vim.cmd(parinfer_on and "ParinferOn" or "ParinferOff")
+  vim.cmd(vim.g.parinfer_enabled == 1 and "ParinferOff" or "ParinferOn")
 end, { desc = "Toggle parinfer" })
 
 map("n", "<leader>>>", "<cmd>vertical resize +5<cr>", { desc = "Wider +5" })

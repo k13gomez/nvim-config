@@ -16,6 +16,7 @@ wk.setup({
     { "<leader>c", group = "clojure / portal" },
     { "<leader>cr", group = "clojure: run / reload / reset" },
     { "<leader>m", group = "elixir / mix" },
+    { "<leader>n", group = "new" },
     { "<leader>p", group = "plugins" },
     { "<leader>G", group = "git" },
     { "<leader>t", group = "tabs / toggles" },
