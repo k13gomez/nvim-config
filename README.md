@@ -90,6 +90,7 @@ The popup at runtime is provided by [which-key.nvim](https://github.com/folke/wh
 | `<leader>fb` | Telescope: buffers |
 | `<leader>fh` | Telescope: help tags |
 | `<leader>fs` | Telescope: switch the tokyonight style, with live preview (remembered across restarts) |
+| `<leader>:` | Telescope: search and run commands |
 
 ## Tabs
 
