@@ -20,6 +20,7 @@ wk.setup({
     { "<leader>p", group = "plugins" },
     { "<leader>q", group = "quit" },
     { "<leader>G", group = "git" },
+    { "<leader>h", group = "hunk" },
     { "<leader>t", group = "tabs / toggles" },
     { "<leader>u", group = "insert / utilities" },
     { "<leader>uf", group = "pretty-print" },

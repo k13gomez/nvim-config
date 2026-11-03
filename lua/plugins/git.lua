@@ -19,5 +19,8 @@ gitsigns.setup({
     map("<leader>Gs", gitsigns.stage_hunk, "Stage hunk")
     map("<leader>Gr", gitsigns.reset_hunk, "Reset hunk")
     map("<leader>Gb", gitsigns.blame_line, "Blame line")
+    map("<leader>hr", gitsigns.reset_hunk, "Reset hunk")
+    map("<leader>hs", gitsigns.stage_hunk, "Stage hunk")
+    map("<leader>hp", gitsigns.preview_hunk, "Preview hunk")
   end,
 })
