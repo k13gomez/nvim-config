@@ -1,5 +1,5 @@
--- Shows the banner on the start screen as a sixel image. sixels/ keeps one file for each colorscheme.
--- A colorscheme without a file gets one rendered with ImageMagick, and later starts use it again.
+-- Shows the banner on the start screen as a sixel image. sixels/ keeps one file for each colorscheme and cell size.
+-- A missing file is rendered with ImageMagick, and later starts use it again. git ignores sixels/.
 -- The layout needs the cell size in pixels. Only tmux reports it, so the image needs tmux and a terminal with sixel.
 local M = {}
 
@@ -48,29 +48,25 @@ local function render(path, w, h)
   return res.code == 0 and read(path) or nil
 end
 
--- A file of a different size, for example after a font change, is rendered again.
+-- The file name carries the padded size, so a font change gets its own file and old files stay as they are.
+-- A file whose header shows another size, such as an empty one left by a failed render, is rendered again.
 local function sixel()
   local name = vim.g.colors_name
   if not name or not cell_width then
     return ""
   end
-  if not cache[name] then
-    local w = math.ceil(width / cell_width) * cell_width
-    local h = M.rows * cell_height
-    local path = config .. "/sixels/" .. name .. ".sixel"
+  local w = math.ceil(width / cell_width) * cell_width
+  local h = M.rows * cell_height
+  local path = string.format("%s/sixels/%s-%dx%d.sixel", config, name, w, h)
+  if not cache[path] then
     local data = read(path)
     local file_w, file_h = (data or ""):match('^\027P[^q]*q"1;1;(%d+);(%d+)')
     if tonumber(file_w) ~= w or tonumber(file_h) ~= h then
-      -- In a floating window, such as the ,fs picker, Normal reports the float's background.
-      -- The render waits until the float closes.
-      if vim.api.nvim_win_get_config(0).relative ~= "" then
-        return ""
-      end
       data = render(path, w, h)
     end
-    cache[name] = data or ""
+    cache[path] = data or ""
   end
-  return cache[name]
+  return cache[path]
 end
 
 -- sixel_support is true when tmux is built with sixel. client_termfeatures lists sixel only if the terminal has it.

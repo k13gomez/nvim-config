@@ -360,7 +360,7 @@ Any filetype whose tree-sitter parser has a fold query folds by syntax. Folds st
 
 The start screen lists recent files and shows how long startup took. `,h` opens it again.
 
-The terminal image comes from `sixels/<colorscheme>.sixel`, for example `sixels/tokyonight-night.sixel`. A colorscheme without a file gets one rendered with ImageMagick on the first start, and later starts use it again. After a change to `neovimium.png`, delete the files in `sixels/` to render them again. A file is also rendered again when the terminal's cell size changes.
+The terminal image comes from `sixels/<colorscheme>-<width>x<height>.sixel`, for example `sixels/tokyonight-night-952x310.sixel`. The size is the image padded to whole terminal cells, so each cell size gets its own file. When the file for the current colorscheme and cell size is missing, ImageMagick renders it, including while `,fs` previews a style. Later starts reuse it. The files are a local cache and git ignores them. After a change to `neovimium.png`, delete the files in `sixels/` to render them again.
 
 | Key | Action |
 |---|---|
