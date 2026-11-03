@@ -17,6 +17,9 @@ local function tab_name(name, tab)
   if vim.t[tab.tabId].tabname then
     return name
   end
+  if tab.filetype == "startify" then
+    return "*welcome*"
+  end
   if tab.buftype == "terminal" then
     local buf = vim.fn.tabpagebuflist(tab.tabnr)[vim.fn.tabpagewinnr(tab.tabnr)]
     return term_label(buf) or name
@@ -28,6 +31,9 @@ local function tab_name(name, tab)
 end
 
 local function file_name(name)
+  if vim.bo.filetype == "startify" then
+    return "*welcome*"
+  end
   if vim.bo.buftype == "terminal" then
     return term_label(0) or name
   end

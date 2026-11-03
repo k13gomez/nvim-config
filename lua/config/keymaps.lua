@@ -5,7 +5,7 @@ local ex = require("helpers.elixir")
 
 map("n", "<leader>ne", "<cmd>tabnew<cr>", { desc = "Empty buffer in new tab" })
 map("n", "<leader>nt", "<cmd>tab terminal<cr>", { desc = "Terminal in new tab" })
-map("n", "<leader>w", "<cmd>Startify<cr>", { desc = "Start screen" })
+map("n", "<leader>w", require("plugins.startify").open, { desc = "Start screen" })
 
 map("n", "<leader>bw", "<cmd>w<cr>", { desc = "Write buffer" })
 map("n", "<leader>bq", "<cmd>q<cr>", { desc = "Quit buffer" })
