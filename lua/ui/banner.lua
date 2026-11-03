@@ -24,8 +24,10 @@ end
 -- tmux clears the image's cells to the terminal's default background, which is black.
 -- The theme background fills the cells around the image, or a black band shows.
 local function render(path, w, h)
-  local bg = vim.api.nvim_get_hl(0, { name = "Normal", link = false }).bg
-  if not bg or vim.fn.executable("magick") == 0 then
+  -- With a float focused, such as the ,fs picker, nvim_get_hl gives Normal as mapped by the float's winhighlight.
+  -- synIDattr reads the global group.
+  local bg = vim.fn.synIDattr(vim.fn.hlID("Normal"), "bg#")
+  if bg == "" or vim.fn.executable("magick") == 0 then
     return nil
   end
   vim.fn.mkdir(vim.fs.dirname(path), "p")
@@ -34,7 +36,7 @@ local function render(path, w, h)
       "magick",
       config .. "/neovimium.png",
       "-background",
-      string.format("#%06x", bg),
+      bg,
       "-flatten",
       "-resize",
       width .. "x" .. height,
