@@ -1,16 +1,24 @@
 local M = {}
 
 local styles = { "night", "storm", "moon", "day" }
-local state_file = vim.fn.stdpath("state") .. "/tokyonight-style"
+-- Shared with Emacs, tmux (~/.byobu/tokyonight.tmux) and WezTerm, which all follow it.
+local state_dir = vim.fn.expand("~/.local/state/tokyonight")
+local state_file = state_dir .. "/style"
 
-local function load()
+local function read()
   local ok, lines = pcall(vim.fn.readfile, state_file)
   local style = ok and lines[1]
-  return vim.tbl_contains(styles, style) and style or "night"
+  return vim.tbl_contains(styles, style) and style or nil
+end
+
+local function load()
+  return read() or "night"
 end
 
 local function save(style)
+  vim.fn.mkdir(state_dir, "p")
   vim.fn.writefile({ style }, state_file)
+  pcall(vim.system, { "tmux", "source-file", "-q", vim.fn.expand("~/.byobu/tokyonight.tmux") })
 end
 
 -- Each tokyonight-<style> colorscheme also sets 'background', so "day" switches to light.
@@ -66,8 +74,29 @@ function M.pick_style()
   picker:find()
 end
 
+local function follow()
+  vim.fn.mkdir(state_dir, "p")
+  local watcher = vim.uv.new_fs_event()
+  if not watcher then
+    return
+  end
+  watcher:start(state_dir, {}, function(err, filename)
+    if err or filename ~= "style" then
+      return
+    end
+    -- A writer truncates before writing, so an event can see an empty file; skip those.
+    vim.schedule(function()
+      local style = read()
+      if style and vim.g.colors_name ~= "tokyonight-" .. style then
+        apply(style)
+      end
+    end)
+  end)
+end
+
 vim.opt.termguicolors = true
 apply(load())
+follow()
 vim.opt.guifont = "Monaco:h14"
 
 return M
