@@ -1,5 +1,7 @@
 local group = vim.api.nvim_create_augroup("UserAutocmds", { clear = true })
 
+vim.filetype.add({ extension = { clje = "clojure" } })
+
 vim.api.nvim_create_autocmd("TabLeave", {
   group = group,
   callback = function()
